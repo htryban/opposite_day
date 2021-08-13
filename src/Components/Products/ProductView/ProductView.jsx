@@ -12,16 +12,14 @@ const createMarkup = (text) => {
 
 const ProductView = ({ addProduct }) => {
   const [product, setProduct] = useState({});
-  const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const fetchProduct = async (id) => {
     const response = await commerce.products.retrieve(id);
-    const { name, price, media, quantity, description } = response;
+    const { name, price, media, description } = response;
     setProduct({
       id,
       name,
-      quantity,
       description,
       src: media.source,
       price: price.formatted_with_symbol,
@@ -33,15 +31,6 @@ const ProductView = ({ addProduct }) => {
     fetchProduct(id[2]);
   }, []);
 
-  const handleQuantity = (param) => {
-    if (param === "decries" && quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-    if (param === "increase" && quantity < 10) {
-      setQuantity(quantity + 1);
-    }
-  };
-console.log(product)
   return (
     <Container className="product-view">
       <Grid container spacing={4}>
@@ -61,13 +50,13 @@ console.log(product)
             dangerouslySetInnerHTML={createMarkup(product.description)}
           />
           <Typography variant="h3">Price: {product.price}</Typography>
-          <Grid container spacing={4}>              
+          <Grid container spacing={4}>
             <Grid item xs={12}>
               <Button
                 size="large"
                 className="custom-button"
                 onClick={() => {
-                  addProduct(product.id, quantity);
+                  addProduct(product.id, 1);
                 }}>
                 <AddShoppingCart /> Add to Cart
               </Button>

@@ -36,7 +36,7 @@ const theme = createTheme({
 });
 
 const App = () => {
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    // const [mobileOpen, setMobileOpen] = React.useState(false);
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState({});
     const [order, setOrder] = useState({});
@@ -95,7 +95,7 @@ const App = () => {
         }
     };
 
-    const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+    // const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
     return (
         <ThemeProvider theme={theme}>

@@ -32,7 +32,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
       };
       generateToken();
     }
-  }, [cart]);
+  }, [cart, activeStep, history]);
 
   const test = (data) => {
     setShippingData(data);
