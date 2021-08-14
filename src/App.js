@@ -120,7 +120,8 @@ const App = () => {
                                 onCaptureCheckout={handleCaptureCheckout}
                                 error={errorMessage} />
                         </Route>
-                        <Route exact path="/product/:id">
+                        <Route exact path="/product/:permalink">
+                            hello
                             <ProductView addProduct={handleAddToCart} />
                         </Route>
                     </Switch>

@@ -12,11 +12,15 @@ const createMarkup = (text) => {
 
 const ProductView = ({ addProduct }) => {
   const [product, setProduct] = useState({});
+  const [sizes, setSizes] = useState(true);
   const [loading, setLoading] = useState(true);
 
-  const fetchProduct = async (id) => {
-    const response = await commerce.products.retrieve(id);
-    const { name, price, media, description } = response;
+
+
+  const fetchProduct = async (permalink) => {
+    const response = await commerce.products.retrieve(permalink, { type: 'permalink' });
+    console.log("product", response)
+    const { id, name, price, media, description } = response;
     setProduct({
       id,
       name,
@@ -24,11 +28,17 @@ const ProductView = ({ addProduct }) => {
       src: media.source,
       price: price.formatted_with_symbol,
     });
+    await fetchSizes(id);
   };
 
+  const fetchSizes = async (id) => {
+    const response = await commerce.products.getVariants(id).then((variants) => setSizes(variants.data))
+    console.log(sizes)
+  }
+
   useEffect(() => {
-    const id = window.location.pathname.split("/");
-    fetchProduct(id[2]);
+    const link = window.location.pathname.split("/");
+    fetchProduct(link[2]);
   }, []);
 
   return (

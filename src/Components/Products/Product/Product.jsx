@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 import useStyles from './styles';
 import "./style.css";
-
 const Product = ({ product, onAddToCart }) => {
+    console.log(product)
     const classes = useStyles();
     return (
         <Card className="productCard">
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product.permalink}`} style={{ textDecoration: 'none' }}>
                 <CardActionArea>
                     <CardMedia className={classes.media} image={product.media.source} title={product.name} />
                     <CardContent>
