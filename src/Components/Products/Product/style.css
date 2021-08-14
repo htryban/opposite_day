@@ -8,3 +8,7 @@
     transform: scale(1.05);
     box-shadow: 0 0 10px 5px #c1ffbd;
 }
+
+.MuiCardActionArea-focusHighlight {
+    background: white !important;
+}
