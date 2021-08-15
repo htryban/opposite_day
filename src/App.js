@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {commerce} from './lib/commerce'
-import {Products, Navbar, Cart, Checkout} from './Components'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Cart, Checkout, Navbar, Products} from './Components'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import ProductView from './Components/Products/ProductView/ProductView';
+import Spinner from "./Components/Spinner/Spinner";
 
 const theme = createTheme({
 	palette: {
@@ -37,7 +38,7 @@ const theme = createTheme({
 
 const App = () => {
 	// const [mobileOpen, setMobileOpen] = React.useState(false);
-	const [products, setProducts] = useState([]);
+	const [products, setProducts] = useState();
 	const [cart, setCart] = useState({});
 	const [order, setOrder] = useState({});
 	const [errorMessage, setErrorMessage] = useState('');
@@ -98,6 +99,8 @@ const App = () => {
 
 	// const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
+	if (!products) return <Spinner />
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
@@ -122,7 +125,7 @@ const App = () => {
 								error={errorMessage} />
 						</Route>
 						<Route exact path="/product/:permalink">
-							hello
+							hello there
 							<ProductView addProduct={handleAddToCart} />
 						</Route>
 					</Switch>

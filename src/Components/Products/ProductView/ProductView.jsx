@@ -1,7 +1,7 @@
-import {Grid, Button, Container, Typography} from "@material-ui/core";
+import {Button, Container, Grid, Typography} from "@material-ui/core";
 import {AddShoppingCart} from '@material-ui/icons'
 import {commerce} from '../../../lib/commerce';
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Col, Row} from "react-bootstrap";
 import Spinner from "../../Spinner/Spinner";
 import ImageGallery from 'react-image-gallery';
