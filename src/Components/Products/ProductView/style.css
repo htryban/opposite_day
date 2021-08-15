@@ -17,11 +17,14 @@
 
 .product-view .text h2 {
     font-size: 30px;
+    font-weight: bold;
+    margin-top: 3%;
 }
 
 .product-view .text span h1 {
     font-size: 20px;
     font-weight: 300;
+    margin-top: 3%;
 }
 
 .product-view .text h3 {
@@ -34,10 +37,16 @@
     margin-bottom: 5px;
 }
 
+.right-align {
+    display: flex;
+    justify-content: flex-end;
+}
+
 .MuiContainer-root.product-view .custom-button {
     color: #000;
     background-color: #c1ffbd;
     border: solid 1px black
+
 }
 
 .MuiContainer-root.product-view .custom-button:hover {
@@ -86,4 +95,8 @@
     height: 50px;
     margin-right: 10px;
     background-color: lightcoral;
+}
+
+.image-gallery-thumbnail.active, .image-gallery-thumbnail:focus {
+    border: 4px solid #c1ffbd !important;
 }

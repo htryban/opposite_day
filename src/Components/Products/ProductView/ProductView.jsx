@@ -26,6 +26,7 @@ const ProductView = ({addProduct}) => {
 		console.log("product", response)
 		const {id, name, price, media, description, assets} = response;
 		await fetchProductImages(assets)
+		await fetchSizes(id);
 		setProduct({
 			id,
 			name,
@@ -33,14 +34,15 @@ const ProductView = ({addProduct}) => {
 			src: media.source,
 			price: price.formatted_with_symbol,
 		});
-		await fetchSizes(id);
 	};
 
 	const fetchProductImages = async (assets) => {
 		const images = []
 		assets.forEach(element => (
-			images.push({original: element.url, thumbnail: element.url, thumbnailHeight: 75, thumbnailWidth: 75,
-				originalHeight: 400, originalWidth: 400})
+			images.push({
+				original: element.url, thumbnail: element.url, thumbnailHeight: 75, thumbnailWidth: 75,
+				originalHeight: 400, originalWidth: 400
+			})
 		))
 		console.log(images)
 		setProductImages(images)
@@ -86,7 +88,7 @@ const ProductView = ({addProduct}) => {
 					{/*	src={product.src}*/}
 					{/*	alt={product.name}*/}
 					{/*/>*/}
-					<ImageGallery items={productImages} />
+					<ImageGallery items={productImages} showPlayButton={false} />
 				</Grid>
 				<Grid item xs={12} md={4} className="text">
 					<Typography variant="h2">{product.name}</Typography>
@@ -98,14 +100,14 @@ const ProductView = ({addProduct}) => {
 					<br />
 					{sizes ? <SizeSection /> : ''}
 					<Grid container spacing={4} add style={{paddingTop: '20px'}}>
-						<Grid item xs={12}>
+						<Grid item xs={12} className="right-align">
 							<Button
 								size="large"
 								className="custom-button"
 								onClick={() => {
 									size ? addProduct(product.id, 1, size.id) : addProduct(product.id, 1);
 								}}>
-								<AddShoppingCart /> Add to Cart
+								<AddShoppingCart /> Add to Cart}
 							</Button>
 						</Grid>
 					</Grid>
