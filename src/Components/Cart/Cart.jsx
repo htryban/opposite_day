@@ -22,12 +22,15 @@ const Cart = ({ cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpt
                     </Grid>
                 ))}
             </Grid>
+            <br/><hr/>
             <div className={classes.cardDetails}>
                 <Typography variant="h4">Subtotal: {cart.subtotal.formatted_with_symbol}</Typography>
-                <div>
-                    <Button className={classes.emptyButton} size="large" variant="contained" color="secondary" type="button" onClick={handleEmptyCart}>Empty Cart</Button>
-                    <Button component={Link} to="/checkout" className={classes.checkoutButton} size="large" variant="contained" color="primary" type="button">Checkout</Button>
-                </div>
+
+            </div>
+
+            <div className={classes.checkoutButtons}>
+                <Button className={classes.emptyButton} size="large" variant="contained" color="secondary" type="button" onClick={handleEmptyCart}>Empty Cart</Button>
+                <Button component={Link} to="/checkout" className={classes.checkoutButton} size="large" variant="contained" color="primary" type="button">Checkout</Button>
             </div>
         </>
     );
@@ -38,6 +41,7 @@ const Cart = ({ cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpt
         <Container>
             <div className={classes.toolbar} />
             <Typography className={classes.title} variant="h3" gutterBottom>Your Cart</Typography>
+            <hr/>  <br />
             {!cart.line_items.length ? <EmptyCart /> : <PopulatedCart />}
         </Container>
     )
