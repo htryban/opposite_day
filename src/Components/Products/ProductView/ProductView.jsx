@@ -57,6 +57,7 @@ const ProductView = ({addProduct}) => {
 	useEffect(() => {
 		const link = window.location.pathname.split("/");
 		fetchProduct(link[2]);
+		// eslint-disable-next-line
 	}, []);
 
 	// const handleChangeSize = (event) => {
@@ -105,9 +106,10 @@ const ProductView = ({addProduct}) => {
 								size="large"
 								className="custom-button"
 								onClick={() => {
-									size ? addProduct(product.id, 1, size.id) : addProduct(product.id, 1);
+									console.log("cart product: ", product, "cart size", size, "sizes?:", sizes)
+									sizes ? addProduct(product.id, 1, size.id) : addProduct(product.id, 1);
 								}}>
-								<AddShoppingCart /> Add to Cart}
+								<AddShoppingCart /> Add to Cart
 							</Button>
 						</Grid>
 					</Grid>
