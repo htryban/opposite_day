@@ -59,10 +59,10 @@ const ProductView = ({addProduct}) => {
 		fetchProduct(link[2]);
 	}, []);
 
-	const handleChangeSize = (event) => {
-		setSize(event.target.value);
-		console.log("selected size", size)
-	};
+	// const handleChangeSize = (event) => {
+	// 	setSize(event.target.value);
+	// 	console.log("selected size", size)
+	// };
 
 	const SizeSection = () => (
 		<Row className="buttonRow">
