@@ -1,3 +1,5 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
 .MuiContainer-root.product-view {
     height: 80vh;
     display: flex;
