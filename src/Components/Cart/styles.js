@@ -28,7 +28,8 @@ export default makeStyles((theme) => ({
 	},
 	checkoutButtons: {
 		display: 'flex',
-		marginTop: '3%',
+		marginTop: '5%',
+		paddingBottom: '10%',
 		width: '100%',
 		justifyContent: 'flex-end',
 	}
