@@ -67,7 +67,7 @@ const ProductView = ({addProduct}) => {
 
     const handleChangeSize = (event) => {
         const i = event.target.value;
-        //setSize(sizes[i]);
+        setSize(sizes[i]);
     };
 
     const SizeSection = () => (
