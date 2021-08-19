@@ -1,6 +1,7 @@
 import React from 'react'
 import {Card, CardActionArea, CardActions, CardContent, CardMedia, IconButton, Typography} from '@material-ui/core'
-import {AddShoppingCart} from '@material-ui/icons'
+import {LocalMallOutlined} from "@material-ui/icons";
+import AddRoundedIcon from '@material-ui/icons/Add';
 import {Link} from "react-router-dom";
 
 import useStyles from './styles';
@@ -30,7 +31,7 @@ const Product = ({product, onAddToCart}) => {
 			</Link>
 			<CardActions disableSpacing className={classes.cardActions}>
 				<IconButton aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
-					<AddShoppingCart />
+					<AddRoundedIcon /><LocalMallOutlined />
 				</IconButton>
 			</CardActions>
 		</Card>

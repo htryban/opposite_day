@@ -1,6 +1,6 @@
 import React from 'react'
 import {AppBar, Badge, IconButton, Toolbar, Typography} from '@material-ui/core';
-import {ShoppingCartOutlined} from '@material-ui/icons';
+import {LocalMallOutlined} from "@material-ui/icons";
 import {Link, useLocation} from 'react-router-dom';
 
 import logo from '../../assets/logo cropped square.JPG';
@@ -15,15 +15,15 @@ const Navbar = ({totalItems}) => {
 			<AppBar position="fixed" className={classes.appBar} color="inherit">
 				<Toolbar>
 					<Typography component={Link} to="/" variant="h5" className={classes.title} color="inherit">
-						<img src={logo} alt="Commerce.js" height="25px" className={classes.image} />
+						<img src={logo} alt="Commerce.js" height="40px" className={classes.image} />
 						Opposite Day
 					</Typography>
 					<div className={classes.grow} />
-					{location.pathname !== '/cart' && (
+					{location.pathname !== '/bag' && (
 						<div className={classes.button}>
-							<IconButton component={Link} to="/cart" aria-label="Show Cart Items" color="inherit">
+							<IconButton component={Link} to="/bag" aria-label="Show Cart Items" color="inherit">
 								<Badge badgeContent={totalItems} color="secondary">
-									<ShoppingCartOutlined />
+									<LocalMallOutlined />
 								</Badge>
 							</IconButton>
 						</div>)}

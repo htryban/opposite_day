@@ -75,23 +75,20 @@ const App = () => {
 	}
 
 	useEffect(() => {
-		fetchProducts();
-		fetchCart();
+		fetchProducts().then();
+		fetchCart().then();
 	}, []);
 
 	const refreshCart = async () => {
 		const newCart = await commerce.cart.refresh();
-
 		setCart(newCart);
 	};
 
 	const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
 		try {
 			const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
-
 			setOrder(incomingOrder);
-
-			refreshCart();
+			await refreshCart();
 		} catch (error) {
 			setErrorMessage(error.data.error.message);
 		}
@@ -110,7 +107,7 @@ const App = () => {
 						<Route exact path="/">
 							<Products products={products} onAddToCart={handleAddToCart} />
 						</Route>
-						<Route exact path="/cart">
+						<Route exact path="/bag">
 							<Cart
 								cart={cart}
 								handleUpdateCartQuantity={handleUpdateCartQuantity}
