@@ -4,13 +4,12 @@ import useStyles from './styles'
 import CartItem from './CartItem/CartItem'
 import {Link} from 'react-router-dom';
 import Spinner from "../Spinner/Spinner";
-import {DeleteSweepOutlined, ShopOutlined} from "@material-ui/icons";
 
 const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart}) => {
 	const classes = useStyles();
 
 	const EmptyCart = () => (
-		<Typography variant="subtitle1">You have no items in your Cart,
+		<Typography variant="subtitle1">You have no items in your Bag,
 			<Link to="/" className={classes.link}> go back to the home page to add some!</Link>
 		</Typography>
 	);
@@ -34,9 +33,9 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 
 			<div className={classes.checkoutButtons}>
 				<Button className={classes.emptyButton} size="large" variant="contained" color="secondary" type="button"
-				        onClick={handleEmptyCart}><DeleteSweepOutlined />&nbsp;Empty Cart</Button>
+				        onClick={handleEmptyCart}>Empty Bag</Button>
 				<Button component={Link} to="/checkout" className={classes.checkoutButton} size="large"
-				        variant="contained" color="primary" type="button"><ShopOutlined />&nbsp; Checkout</Button>
+				        variant="contained" color="primary" type="button">Checkout</Button>
 			</div>
 		</>
 	);
@@ -46,7 +45,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 	return (
 		<Container>
 			<div className={classes.toolbar} />
-			<Typography className={classes.title} variant="h3" gutterBottom>Your Cart</Typography>
+			<Typography className={classes.title} variant="h3" gutterBottom>Your Bag</Typography>
 			<hr />
 			<br />
 			{!cart.line_items.length ? <EmptyCart /> : <PopulatedCart />}
