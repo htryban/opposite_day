@@ -4,7 +4,6 @@ import useStyles from './styles'
 import CartItem from './CartItem/CartItem'
 import {Link} from 'react-router-dom';
 import Spinner from "../Spinner/Spinner";
-import {DeleteSweepOutlined, ShopOutlined} from "@material-ui/icons";
 
 const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart}) => {
 	const classes = useStyles();

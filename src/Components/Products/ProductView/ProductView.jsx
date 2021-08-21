@@ -3,15 +3,13 @@ import {
     Container,
     FormControl,
     FormControlLabel,
-    FormLabel,
     Grid, Radio,
     RadioGroup,
     Typography
 } from "@material-ui/core";
-import {AddShoppingCart, LocalMallOutlined} from '@material-ui/icons'
+import {LocalMallOutlined} from '@material-ui/icons'
 import {commerce} from '../../../lib/commerce';
 import {useEffect, useState} from "react";
-import {Col, Row} from "react-bootstrap";
 import Spinner from "../../Spinner/Spinner";
 import ImageGallery from 'react-image-gallery';
 
@@ -66,20 +64,19 @@ const ProductView = ({addProduct}) => {
     }, []);
 
     const handleChangeSize = (event) => {
-        const i = event.target.value;
-        setSize(sizes[i]);
+        setSize(sizes[Number(event.target.value)]);
     };
 
     const SizeSection = () => (
         <div className="center">
             <FormControl component="fieldset">
                 <RadioGroup row aria-label="size" value={size} onClick={handleChangeSize}>
-                    {sizes.map(function (size, index) {
-                        if (size.inventory == null || size.inventory > 0) {
-                            return <FormControlLabel control={<Radio/>} label={size.sku} value={size.sku} labelPlacement="bottom"/>;
+                    {sizes.map(function (lSize, index) {
+                        if (lSize.inventory == null || lSize.inventory > 0) {
+                            return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index} control={<Radio/>} label={lSize.sku} value={index} labelPlacement="bottom"/>;
                         } else {
                             return <FormControlLabel disabled={true} control={<Radio/>}
-                                                     label={"Sold Out"} value={size.sku} labelPlacement="bottom"/>;
+                                                     label={"Sold Out"} key={'radiobutton' + index} value={lSize.sku} labelPlacement="bottom"/>;
                         }
                     })}
                 </RadioGroup>
@@ -102,12 +99,12 @@ const ProductView = ({addProduct}) => {
                     <Typography variant="h3" className="right-align">{product.price}</Typography>
                     <br/>
                     {sizes ? <SizeSection/> : ''}
-                    <Grid container spacing={4} add style={{paddingTop: '20px'}}>
+                    <Grid container spacing={4} style={{paddingTop: '20px'}}>
                         <Grid item xs={12} className="right-align">
                             <Button
                                 size="large"
                                 className="custom-button"
-                                fullWidth="true"
+                                fullWidth={true}
                                 onClick={() => {
                                     console.log("bag product: ", product, "bag size", size)
                                     sizes ? addProduct(product.id, 1, size.id) : addProduct(product.id, 1);
