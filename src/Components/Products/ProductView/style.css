@@ -2,7 +2,7 @@
 
 .MuiContainer-root.product-view {
     height: fit-content;
-    display: flex;
+    display: block;
 }
 
 .product-view .image-wrapper img {
