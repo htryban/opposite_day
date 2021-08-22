@@ -1,7 +1,7 @@
 import React from 'react'
-import {Card, CardActionArea, CardActions, CardContent, CardMedia, IconButton, Typography} from '@material-ui/core'
-import {LocalMallOutlined} from "@material-ui/icons";
-import AddRoundedIcon from '@material-ui/icons/Add';
+import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@material-ui/core'
+// import {LocalMallOutlined} from "@material-ui/icons";
+// import AddRoundedIcon from '@material-ui/icons/Add';
 import {Link} from "react-router-dom";
 
 import useStyles from './styles';
@@ -24,16 +24,16 @@ const Product = ({product, onAddToCart}) => {
 								{product.price.formatted_with_symbol}
 							</Typography>
 						</div>
-						<Typography dangerouslySetInnerHTML={{__html: product.description}} variant="body2"
+						<Typography dangerouslySetInnerHTML={{__html: product.description.split('.', 1)}} variant="body2"
 						            color="textSecondary" />
 					</CardContent>
 				</CardActionArea>
 			</Link>
-			<CardActions disableSpacing className={classes.cardActions}>
-				<IconButton aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>
-					<AddRoundedIcon /><LocalMallOutlined />
-				</IconButton>
-			</CardActions>
+			{/*<CardActions disableSpacing className={classes.cardActions}>*/}
+			{/*	<IconButton aria-label="Add to Cart" onClick={() => onAddToCart(product.id, 1)}>*/}
+			{/*		<AddRoundedIcon /><LocalMallOutlined />*/}
+			{/*	</IconButton>*/}
+			{/*</CardActions>*/}
 		</Card>
 	)
 }

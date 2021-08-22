@@ -5,8 +5,8 @@
 }
 
 .MuiPaper-root.productCard:hover {
-	transform: scale(1.05);
-	box-shadow: 0 0 10px 5px #c1ffbd;
+	transform: scale(1.02);
+	box-shadow: 0 0 10px 3px #c1ffbd;
 }
 
 .MuiCardActionArea-focusHighlight {

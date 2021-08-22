@@ -4,9 +4,11 @@ export default makeStyles((theme) => ({
 	toolbar: theme.mixins.toolbar,
 	title: {
 		marginTop: '5%',
+		display: "flex",
+		justifyContent: "center"
 	},
 	emptyButton: {
-		minWidth: '150px',
+		minWidth: '110px',
 		[theme.breakpoints.down('xs')]: {
 			marginBottom: '5px',
 		},
@@ -15,21 +17,19 @@ export default makeStyles((theme) => ({
 		},
 	},
 	checkoutButton: {
-		minWidth: '150px',
+		minWidth: '110px',
 	},
 	link: {
 		textDecoration: 'none',
 	},
 	cardDetails: {
 		display: 'flex',
-		marginTop: '10%',
 		width: '100%',
 		justifyContent: 'flex-end',
 	},
 	checkoutButtons: {
 		display: 'flex',
 		marginTop: '5%',
-		paddingBottom: '10%',
 		width: '100%',
 		justifyContent: 'flex-end',
 	}

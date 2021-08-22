@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import {LocalMallOutlined} from '@material-ui/icons'
 import {commerce} from '../../../lib/commerce';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Spinner from "../../Spinner/Spinner";
 import ImageGallery from 'react-image-gallery';
 
@@ -73,53 +73,67 @@ const ProductView = ({addProduct}) => {
                 <RadioGroup row aria-label="size" value={size} onClick={handleChangeSize}>
                     {sizes.map(function (lSize, index) {
                         if (lSize.inventory == null || lSize.inventory > 0) {
-                            return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index} control={<Radio/>} label={lSize.sku} value={index} labelPlacement="bottom"/>;
+                            return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
+                                                     control={<Radio/>} label={lSize.sku} value={index}
+                                                     labelPlacement="bottom"/>;
                         } else {
                             return <FormControlLabel disabled={true} control={<Radio/>}
-                                                     label={"Sold Out"} key={'radiobutton' + index} value={lSize.sku} labelPlacement="bottom"/>;
+                                                     label={"Sold Out"} key={'radiobutton' + index} value={lSize.sku}
+                                                     labelPlacement="bottom"/>;
                         }
                     })}
                 </RadioGroup>
             </FormControl>
         </div>
-
     );
 
     return (
-        <Container className="product-view">
-            <Grid container spacing={4} onLoad={() => {
-                setLoading(false);
-            }}>
-                <Grid item xs={12} md={9} className="image-wrapper">
-                    <br/>
-                    <ImageGallery items={productImages} showPlayButton={false}/>
-                </Grid>
-                <Grid item xs={12} md={3} className="text">
-                    <Typography variant="h2" className="right-align">{product.name}</Typography>
-                    <Typography variant="h3" className="right-align">{product.price}</Typography>
-                    <br/>
-                    {sizes ? <SizeSection/> : ''}
-                    <Grid container spacing={4} style={{paddingTop: '20px'}}>
-                        <Grid item xs={12} className="right-align">
-                            <Button
-                                size="large"
-                                className="custom-button"
-                                fullWidth={true}
-                                onClick={() => {
-                                    console.log("bag product: ", product, "bag size", size)
-                                    sizes ? addProduct(product.id, 1, size.id) : addProduct(product.id, 1);
-                                }}>
-                                <LocalMallOutlined/> Add to Bag
-                            </Button>
+        <Container className="product-view" justify="center">
+            <Grid className="asdfd">
+            <Grid className="backdrop">
+                <Grid container spacing={4} className="image-wrapper" onLoad={() => {
+                    setLoading(false);
+                }}>
+                    <Grid item xs={12} md={9}>
+                        <br/>
+                        <ImageGallery items={productImages} showPlayButton={false}/>
+                    </Grid>
+                    <Grid item xs={12} md={3} className="text">
+                        <Typography variant="h2" className="right-align">{product.name}</Typography>
+                        <Typography variant="h3" className="right-align">{product.price}</Typography>
+                        <hr/>
+                        <br/>
+                        {sizes ? <SizeSection/> : ''}
+                        <Grid container spacing={4} style={{paddingTop: '20px'}}>
+                            <Grid item xs={12} className="right-align">
+                                <Button
+                                    size="large"
+                                    className={sizes && (size === '' || size === undefined) ? "custom-button-disabled" : "custom-button"}
+                                    disabled={sizes && (size === '' || size === undefined)}
+                                    fullWidth={true}
+                                    onClick={() => {
+                                        console.log("bag product: ", product, "bag size", size)
+                                        sizes ? addProduct(product.id, 1, size.id) : addProduct(product.id, 1);
+                                    }}>
+                                    <LocalMallOutlined/> {sizes && (size === '' || size === undefined) ? 'Choose Size' : 'Add to Bag'}
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
-                    <br/><br/>
-                    <Typography variant="subtitle1" className="right-align">Notes</Typography>
-                    <Typography
-                        variant="subtitle1"
-                        dangerouslySetInnerHTML={createMarkup(product.description)}
-                    />
+                    <div className="notes-section">
+                        <br/><br />
+                        <Typography variant="h5">Notes</Typography>
+                        <hr/>
+                        <Typography
+                            variant="subtitle1"
+                            dangerouslySetInnerHTML={createMarkup(product.description)}
+                        />
+                    </div>
                 </Grid>
+            </Grid>
+            <Grid className="spacer-class">
+                <Typography style={{padding: "5px"}}>&nbsp;</Typography>
+            </Grid>
             </Grid>
             {loading && <Spinner/>}
         </Container>
