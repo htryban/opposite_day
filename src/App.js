@@ -101,7 +101,7 @@ const App = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
-				<div>
+				<div style={{display: 'flex',  justifyContent:'center', height: '100vh'}}>
 					<Navbar totalItems={cart.total_items} />
 					<Switch>
 						<Route exact path="/">
@@ -122,7 +122,6 @@ const App = () => {
 								error={errorMessage} />
 						</Route>
 						<Route exact path="/product/:permalink">
-							hello there
 							<ProductView addProduct={handleAddToCart} />
 						</Route>
 					</Switch>
