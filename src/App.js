@@ -27,17 +27,16 @@ const theme = createTheme({
 			contrastText: '#000000',
 		},
 	},
-	// typography: {
-	//     fontFamily: 'Quicksand',
-	//     fontWeightLight: 400,
-	//     fontWeightRegular: 500,
-	//     fontWeightMedium: 600,
-	//     fontWeightBold: 700,
-	// }
+	typography: {
+		fontFamily: 'Signika Negative',
+		fontWeightLight: 400,
+		fontWeightRegular: 500,
+		fontWeightMedium: 600,
+		fontWeightBold: 700,
+	}
 });
 
 const App = () => {
-	// const [mobileOpen, setMobileOpen] = React.useState(false);
 	const [products, setProducts] = useState();
 	const [cart, setCart] = useState({});
 	const [order, setOrder] = useState({});
@@ -93,8 +92,6 @@ const App = () => {
 			setErrorMessage(error.data.error.message);
 		}
 	};
-
-	// const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
 	if (!products) return <Spinner/>
 
