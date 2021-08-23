@@ -7,6 +7,10 @@ export default makeStyles((theme) => ({
 		display: "flex",
 		justifyContent: "center"
 	},
+	root: {
+		border: '5px white solid',
+		borderRadius: '10px'
+	},
 	emptyButton: {
 		minWidth: '110px',
 		[theme.breakpoints.down('xs')]: {
@@ -15,6 +19,10 @@ export default makeStyles((theme) => ({
 		[theme.breakpoints.up('xs')]: {
 			marginRight: '20px',
 		},
+	},
+	buttons: {
+		display: 'flex',
+		alignItems: 'center',
 	},
 	checkoutButton: {
 		minWidth: '110px',

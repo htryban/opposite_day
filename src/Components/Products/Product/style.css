@@ -1,14 +1,14 @@
 .MuiButtonBase-root {
-	color: black !important;
-	display: block;
-	position: relative;
+    color: black !important;
+    display: block;
+    position: relative;
 }
 
 .MuiPaper-root.productCard:hover {
-	transform: scale(1.02);
-	box-shadow: 0 0 10px 3px #c1ffbd;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px 3px #c1ffbd;
 }
 
 .MuiCardActionArea-focusHighlight {
-	background: white !important;
+    background: white !important;
 }
