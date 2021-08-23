@@ -96,33 +96,33 @@ const App = () => {
 
 	// const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
-	if (!products) return <Spinner />
+	if (!products) return <Spinner/>
 
 	return (
 		<ThemeProvider theme={theme}>
 			<Router>
-				<div style={{display: 'flex',  justifyContent:'center', height: '100vh'}}>
-					<Navbar totalItems={cart.total_items} />
+				<div style={{display: 'flex', justifyContent: 'center', height: '100vh'}}>
+					<Navbar totalItems={cart.total_items}/>
 					<Switch>
 						<Route exact path="/">
-							<Products products={products} onAddToCart={handleAddToCart} />
+							<Products products={products} onAddToCart={handleAddToCart}/>
 						</Route>
 						<Route exact path="/bag">
 							<Cart
 								cart={cart}
 								handleUpdateCartQuantity={handleUpdateCartQuantity}
 								handleRemoveFromCart={handleRemoveFromCart}
-								handleEmptyCart={handleEmptyCart} />
+								handleEmptyCart={handleEmptyCart}/>
 						</Route>
 						<Route exact path="/checkout">
 							<Checkout
 								cart={cart}
 								order={order}
 								onCaptureCheckout={handleCaptureCheckout}
-								error={errorMessage} />
+								error={errorMessage}/>
 						</Route>
 						<Route exact path="/product/:permalink">
-							<ProductView addProduct={handleAddToCart} />
+							<ProductView addProduct={handleAddToCart}/>
 						</Route>
 					</Switch>
 				</div>

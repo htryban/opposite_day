@@ -14,7 +14,7 @@ const Product = ({product, onAddToCart}) => {
 		<Card className="productCard">
 			<Link to={`/product/${product.permalink}`} style={{textDecoration: 'none'}}>
 				<CardActionArea>
-					<CardMedia className={classes.media} image={product.media.source} title={product.name} />
+					<CardMedia className={classes.media} image={product.media.source} title={product.name}/>
 					<CardContent>
 						<div className={classes.cardContent}>
 							<Typography variant="h5" gutterBottom>
@@ -24,8 +24,9 @@ const Product = ({product, onAddToCart}) => {
 								{product.price.formatted_with_symbol}
 							</Typography>
 						</div>
-						<Typography dangerouslySetInnerHTML={{__html: product.description.split('.', 1)}} variant="body2"
-						            color="textSecondary" />
+						<Typography dangerouslySetInnerHTML={{__html: product.description.split('.', 1)}}
+						            variant="body2"
+						            color="textSecondary"/>
 					</CardContent>
 				</CardActionArea>
 			</Link>

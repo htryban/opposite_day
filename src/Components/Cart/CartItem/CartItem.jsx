@@ -9,7 +9,7 @@ const CartItem = ({item, onUpdateCartQuantity, onRemoveFromCart}) => {
 	console.log({item});
 	return (
 		<Card>
-			<CardMedia image={item.media.source} alt={item.name} className={classes.media} />
+			<CardMedia image={item.media.source} alt={item.name} className={classes.media}/>
 			<CardContent className={classes.cardContent}>
 				<Typography variant="h4">{item.name}</Typography>
 			</CardContent>
@@ -27,7 +27,7 @@ const CartItem = ({item, onUpdateCartQuantity, onRemoveFromCart}) => {
 				</div>
 				<Button variant="contained" text-align="center" type="button" color="secondary"
 				        onClick={() => onRemoveFromCart(item.id)}>
-					<DeleteForeverOutlined />
+					<DeleteForeverOutlined/>
 				</Button>
 			</CardActions>
 		</Card>

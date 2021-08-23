@@ -3,7 +3,7 @@ import "./style.css";
 
 const Spinner = () => (
 	<div className="spinner">
-		<CircularProgress />
+		<CircularProgress/>
 	</div>
 );
 

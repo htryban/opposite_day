@@ -59,12 +59,12 @@ const AddressForm = ({checkoutToken, test}) => {
 					shippingOption
 				}))}>
 					<Grid container spacing={3}>
-						<FormInput required name="firstName" label="First Name" />
-						<FormInput required name="lastName" label="Last Name" />
-						<FormInput required name="address" label="Address" />
-						<FormInput required name="email" label="Email" />
-						<FormInput required name="city" label="City" />
-						<FormInput required name="zip" label="Zip / Postal Code" />
+						<FormInput required name="firstName" label="First Name"/>
+						<FormInput required name="lastName" label="Last Name"/>
+						<FormInput required name="address" label="Address"/>
+						<FormInput required name="email" label="Email"/>
+						<FormInput required name="city" label="City"/>
+						<FormInput required name="zip" label="Zip / Postal Code"/>
 						<Grid item xs={12} sm={6}>
 							<InputLabel>Shipping Country</InputLabel>
 							<Select value={shippingCountry} fullWidth
@@ -108,14 +108,14 @@ const AddressForm = ({checkoutToken, test}) => {
 							</Select>
 						</Grid>
 					</Grid>
-					<br />
+					<br/>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
 						<Button component={Link} variant="outlined" to="/cart">Back to Cart</Button>
 						<Button type="submit" variant="contained" color="primary">Next</Button>
 					</div>
 				</form>
 			</FormProvider>
-			<br />
+			<br/>
 			<Typography variant="subtitle1">These products are not currently real, and this site is for testing only.
 				Please come back soon to view our new collections when they are available. By clicking 'Next',
 				you agree that any product that you checkout is not real and will never be shipping. You are committing

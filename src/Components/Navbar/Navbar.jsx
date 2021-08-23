@@ -15,15 +15,15 @@ const Navbar = ({totalItems}) => {
 			<AppBar position="fixed" className={classes.appBar} color="inherit">
 				<Toolbar>
 					<Typography component={Link} to="/" variant="h5" className={classes.title} color="inherit">
-						<img src={logo} alt="Commerce.js" height="40px" className={classes.image} />
+						<img src={logo} alt="Commerce.js" height="40px" className={classes.image}/>
 						Opposite Day
 					</Typography>
-					<div className={classes.grow} />
+					<div className={classes.grow}/>
 					{location.pathname !== '/bag' && (
 						<div className={classes.button}>
 							<IconButton component={Link} to="/bag" aria-label="Show Cart Items" color="inherit">
 								<Badge badgeContent={totalItems} color="secondary">
-									<LocalMallOutlined />
+									<LocalMallOutlined/>
 								</Badge>
 							</IconButton>
 						</div>)}

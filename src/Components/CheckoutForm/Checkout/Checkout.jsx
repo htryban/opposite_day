@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Button,
-    CircularProgress,
-    CssBaseline,
-    Divider,
-    Paper,
-    Step,
-    StepLabel,
-    Stepper,
-    Typography
+	Button,
+	CircularProgress,
+	CssBaseline,
+	Divider,
+	Paper,
+	Step,
+	StepLabel,
+	Stepper,
+	Typography
 } from '@material-ui/core';
 import {Link, useHistory} from 'react-router-dom';
 
@@ -55,15 +55,15 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 			<div>
 				<Typography variant="h5">Thank you for your purchase, {order.customer.firstname}.</Typography>
 				<Typography variant="body1">You should receive an order confirmation email soon.</Typography>
-				<Divider className={classes.divider} />
+				<Divider className={classes.divider}/>
 				<Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
 			</div>
-			<br />
+			<br/>
 			<Button component={Link} variant="outlined" type="button" to="/">Home</Button>
 		</>
 	) : (
 		<div className={classes.spinner}>
-			<CircularProgress />
+			<CircularProgress/>
 		</div>
 	));
 
@@ -71,10 +71,10 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 		Confirmation = () => (
 			<>
 				<Typography variant="h5">Error: {error}</Typography>
-				<br />
+				<br/>
 				<Typography variant="body1">Please double check your information and try again.</Typography>
-				<br />
-				<br />
+				<br/>
+				<br/>
 				<Button component={Link} variant="outlined" type="button" to="/">Back Home</Button>
 				{/* <Button component={Link} variant="outlined" type="button" to="/cart">Try Again</Button> */}
 			</>
@@ -83,14 +83,14 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 
 	const Form = () => (activeStep === 0
 		?
-		<AddressForm checkoutToken={checkoutToken} nextStep={nextStep} setShippingData={setShippingData} test={test} />
+		<AddressForm checkoutToken={checkoutToken} nextStep={nextStep} setShippingData={setShippingData} test={test}/>
 		: <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData}
-		               onCaptureCheckout={onCaptureCheckout} />);
+		               onCaptureCheckout={onCaptureCheckout}/>);
 
 	return (
 		<>
-			<CssBaseline />
-			<div className={classes.toolbar} />
+			<CssBaseline/>
+			<div className={classes.toolbar}/>
 			<main className={classes.layout}>
 				<Paper className={classes.paper}>
 					<Typography variant="h4" align="center">Checkout</Typography>
@@ -101,7 +101,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 							</Step>
 						))}
 					</Stepper>
-					{activeStep === steps.length ? <Confirmation /> : checkoutToken && <Form />}
+					{activeStep === steps.length ? <Confirmation/> : checkoutToken && <Form/>}
 				</Paper>
 			</main>
 		</>
