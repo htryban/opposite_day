@@ -137,7 +137,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 				</>
 				<br/>
 				<div className={classes.cardDetails}>
-					<Typography variant="h4">Subtotal: {cart.subtotal.formatted_with_symbol}</Typography>
+					<Typography variant="h5">Subtotal: {cart.subtotal.formatted_with_symbol}</Typography>
 				</div>
 				<div className={classes.checkoutButtons}>
 					<Button className={classes.emptyButton} size="large" variant="contained" color="secondary"
