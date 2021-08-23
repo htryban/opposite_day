@@ -82,7 +82,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 								</Button>
 							]
 							return (
-								<TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+								<TableRow hover role="checkbox" tabIndex={-1} key={'row'+item.id}>
 									{columns.map((column, index) => {
 										const value = row[index];
 										return (
