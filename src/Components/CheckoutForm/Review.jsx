@@ -5,9 +5,11 @@ const Review = ({checkoutToken}) => (
 	<>
 		<Typography variant="h6" gutterBottom>Order summary</Typography>
 		<List disablePadding>
-			{checkoutToken.live.line_items.map((product) => (
-				<ListItem style={{padding: '10px 0'}} key={product.name}>
-					<ListItemText primary={product.name} secondary={`Quantity: ${product.quantity}`}/>
+			{checkoutToken.live.line_items.map((product, index) => (
+				<ListItem style={{padding: '10px 0'}} key={product.variant && product.variant.sku ? (product.variant.sku + product.name) : (product.name + index)}>
+					<ListItemText
+						primary={product.variant && product.variant.sku ? (product.name + " ("+product.variant.sku+")") : product.name}
+						secondary={`Quantity: ${product.quantity}`}/>
 					<Typography variant="body2">{product.line_total.formatted_with_symbol}</Typography>
 				</ListItem>
 			))}

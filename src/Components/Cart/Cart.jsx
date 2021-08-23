@@ -45,7 +45,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 
 	const CartTable = () => (
 		<Paper className={classes.root}>
-			<Typography variant="h4" style={{padding: "15px"}} gutterBottom>Your Bag</Typography>
+			<Typography variant="h4" align="center" style={{padding: "15px"}} gutterBottom>Your Bag</Typography>
 			<hr/>
 			<TableContainer className={classes.container}>
 				<Table stickyHeader aria-label="sticky table">
@@ -106,7 +106,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 	const CartCards = () => (
 		<>
 			<Grid>
-				<Typography variant="h4" style={{padding: "15px"}} gutterBottom>Your Bag</Typography>
+				<Typography variant="h4" align="center" style={{padding: "15px"}} gutterBottom>Your Bag</Typography>
 				<hr/>
 				<br/>
 				<Grid container justifyContent="center" spacing={3}>
@@ -126,7 +126,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 		<>
 			<Typography style={{padding: "5px"}}>&nbsp;</Typography>
 			<Grid>
-				<Typography variant="h4" align="left" gutterBottom>Bag Total</Typography>
+				<Typography variant="h4" align="center" gutterBottom>Bag Total</Typography>
 				<hr/>
 				<>
 					{cart.line_items.map((item) => (
