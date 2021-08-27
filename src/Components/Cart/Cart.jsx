@@ -20,7 +20,7 @@ import "./style.css";
 import {DeleteForeverOutlined, LocalMallOutlined} from "@material-ui/icons";
 import {Image} from "react-bootstrap";
 
-const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart, enqueueSnackbar}) => {
+const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart, enqueueSnackbar, closeSnackbar}) => {
 	const classes = useStyles();
 
 	const handleAddQuantityCheck = async (item, productId, quantity, variantId) => {
@@ -59,7 +59,8 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 					handleUpdateCartQuantity(item.id, item.variant.inventory, item.variant.id)
 					enqueueSnackbar('Some of your items don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
 						variant: "error",
-						autoHideDuration: 10000,
+						persist: true,
+						dismissAction,
 						TransitionComponent: Slide,
 						preventDuplicate: true,
 						anchorOrigin: { vertical: 'top', horizontal:'right'}
@@ -67,6 +68,12 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 				}
 		})
 	})
+
+	const dismissAction = key => (
+			<Button onClick={() => { closeSnackbar(key) }}>
+				Dismiss
+			</Button>
+	);
 
 	const EmptyCart = () => (
 		<Grid>

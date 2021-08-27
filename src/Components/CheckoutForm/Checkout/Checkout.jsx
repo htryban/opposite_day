@@ -25,7 +25,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 	const [shippingData, setShippingData] = useState({});
 	const classes = useStyles();
 	const history = useHistory();
-	const [allowedAmounts, setAllowedAmounts] = useState(false);
+	//const [allowedAmounts, setAllowedAmounts] = useState(false);
 
 	const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);

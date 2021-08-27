@@ -85,7 +85,7 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 			}
 			setSize('');
 			setCartSizes(inCart);
-	}, [cart])
+	}, [cart, product, sizes])
 
 	useEffect(() => {
 		const link = window.location.pathname.split("/");
