@@ -43,7 +43,6 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 			src: media.source,
 			price: price.formatted_with_symbol,
 		});
- // open a ticket for this and abandon for now, its not worth it.
 	};
 
 	const fetchProductImages = async (assets) => {
@@ -64,20 +63,16 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 
 	useEffect(() => {
 		const inCart = []
+		sizes.forEach(() => {
+			inCart.push(0);
+		}) // initiates cart sizes array with a zero for each size option
 		const id = product.id
 			if (cart.line_items) {
 				for (let i = 0; i < cart.line_items.length; i++) {
-					console.log("id", id, " prodID", cart.line_items[i].product_id)
 					if (id === cart.line_items[i].product_id) { //if this product is the same as the one in cart
-						console.log("ids match")
-						console.log("sizes array", sizes)
-							sizes.forEach((option) => {
-								console.log("size", option)
-								console.log("cartsize", cart.line_items[i].variant)
+							sizes.forEach((option, index) => {
 								if (option.id === cart.line_items[i].variant.id) { //if the size is the same.
-									inCart.push(cart.line_items[i].quantity); //push the number of that item in cart onto array.
-								} else {
-									inCart.push(0); //push that there are none of that size in cart.
+									inCart[index] = (cart.line_items[i].quantity); //updates the appropriate size with its amount.
 								}
 							})
 					}
@@ -102,13 +97,11 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 			<FormControl component="fieldset">
 				<RadioGroup row aria-label="size" value={size} onClick={handleChangeSize}>
 					{sizes.map(function (lSize, index) {
-							console.log("cartsizes", cartSizes)
 							if (lSize.inventory == null || ((!cartSizes || cartSizes.length === 0) && lSize.inventory > 0)) {
 								return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
 								                         control={<Radio/>} label={lSize.sku} value={index}
 								                         labelPlacement="bottom"/>;
 							} else if (cartSizes && cartSizes.length > 0) {
-								console.log("cartsize ", cartSizes[index], index)
 								if (cartSizes[index] < lSize.inventory) {
 									return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
 									                         control={<Radio/>} label={lSize.sku} value={index}
