@@ -25,6 +25,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 	const [shippingData, setShippingData] = useState({});
 	const classes = useStyles();
 	const history = useHistory();
+	const [allowedAmounts, setAllowedAmounts] = useState(false);
 
 	const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -49,6 +50,18 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 
 		nextStep();
 	};
+
+	// const legalCheckout = () => {
+	// 	cart.line_items.map((item) => {
+	// 		if (item.variant) {
+	// 			setAllowedAmounts(commerce.checkout.checkQuantity(checkoutToken.id, item.id,
+	// 				[amount: item.variant.quantity, variants:
+	// 						[item.variant.id: 'ad']
+	// 		]);
+	// 		)
+	// 		}
+	// 	})
+	// }
 
 	let Confirmation = () => (order.customer ? (
 		<>
