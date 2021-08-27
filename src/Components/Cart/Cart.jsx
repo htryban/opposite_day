@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
 	Button,
 	Container,
 	Grid,
-	Paper,
+	Paper, Slide,
 	Table, TableBody, TableCell,
 	TableContainer,
 	TableHead,
@@ -14,13 +14,34 @@ import useStyles from './styles'
 import CartItem from './CartItem/CartItem'
 import {Link} from 'react-router-dom';
 import Spinner from "../Spinner/Spinner";
+import {withSnackbar} from "notistack";
 
 import "./style.css";
 import {DeleteForeverOutlined, LocalMallOutlined} from "@material-ui/icons";
 import {Image} from "react-bootstrap";
 
-const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart}) => {
+const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart, enqueueSnackbar, closeSnackbar}) => {
 	const classes = useStyles();
+
+	const handleAddQuantityCheck = async (item, productId, quantity, variantId) => {
+		if (item.variant && item.variant.inventory) { //covers items with sizes
+			if (item.variant.inventory >= quantity) {
+				handleUpdateCartQuantity(productId, quantity, variantId)
+			} else {
+				console.log("no more of this item")
+				enqueueSnackbar('No More Available!', {
+					variant: "error",
+					autoHideDuration: 1500,
+					TransitionComponent: Slide,
+					preventDuplicate: true,
+					anchorOrigin: { vertical: 'top', horizontal:'right'}
+				})
+			}
+		} else { //items with unlimited quantity
+			console.log("unlimited")
+			handleUpdateCartQuantity(productId, quantity, variantId)
+		}
+	}
 
 	const columns = [
 		{id: 'image', label: <LocalMallOutlined/>, maxWidth: 200, align: "center"},
@@ -31,6 +52,28 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 		{id: 'remove', label: 'Remove', maxWidth: 200, align: "center"}
 	];
 
+	useEffect(() => {
+		cart.line_items.forEach((item, index) => {
+				if(item.quantity > item.variant.inventory) {
+					item.quantity = item.variant.inventory;
+					handleUpdateCartQuantity(item.id, item.variant.inventory, item.variant.id)
+					enqueueSnackbar('Some of your items don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
+						variant: "error",
+						persist: true,
+						dismissAction,
+						TransitionComponent: Slide,
+						preventDuplicate: true,
+						anchorOrigin: { vertical: 'top', horizontal:'right'}
+					})
+				}
+		})
+	})
+
+	const dismissAction = key => (
+			<Button onClick={() => { closeSnackbar(key) }}>
+				Dismiss
+			</Button>
+	);
 
 	const EmptyCart = () => (
 		<Grid>
@@ -69,10 +112,10 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 								item.variant && item.variant.sku ? item.variant.sku : "One Size",
 								<div className={classes.buttons} key={'buttonsDiv' + item.id}>
 									<Button type="button" size="small" key={'minusOne' + item.id}
-									        onClick={() => handleUpdateCartQuantity(item.id, item.quantity - 1)}>-</Button>
+									        onClick={() => handleAddQuantityCheck(item, item.id, item.quantity - 1)}>-</Button>
 									<Typography key={'quantity' + item.id}>{item.quantity}</Typography>
 									<Button type="button" size="small" key={'plusOne' + item.id}
-									        onClick={() => handleUpdateCartQuantity(item.id, item.quantity + 1)}>+</Button>
+									        onClick={() => handleAddQuantityCheck(item, item.id, item.quantity + 1)}>+</Button>
 								</div>,
 								item.price.formatted_with_symbol,
 								<Button variant="contained" key={'delete' + item.id} text-align="center" type="button"
@@ -112,7 +155,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 				<Grid container justifyContent="center" spacing={3}>
 					{cart.line_items.map((item) => (
 						<Grid item xs={12} lg={3} md={4} sm={6} key={item.id}>
-							<CartItem item={item} onUpdateCartQuantity={handleUpdateCartQuantity}
+							<CartItem item={item} onUpdateCartQuantity={handleAddQuantityCheck}
 							          onRemoveFromCart={handleRemoveFromCart}/>
 						</Grid>
 					))}
@@ -165,4 +208,4 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 	)
 }
 
-export default Cart
+export default withSnackbar(Cart)

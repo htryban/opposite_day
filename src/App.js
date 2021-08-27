@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import ProductView from './Components/Products/ProductView/ProductView';
 import Spinner from "./Components/Spinner/Spinner";
+import {SnackbarProvider} from 'notistack';
 
 const theme = createTheme({
 	palette: {
@@ -97,33 +98,38 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Router>
-				<div style={{display: 'flex', justifyContent: 'center', height: '100vh'}}>
-					<Navbar totalItems={cart.total_items}/>
-					<Switch>
-						<Route exact path="/">
-							<Products products={products} onAddToCart={handleAddToCart}/>
-						</Route>
-						<Route exact path="/bag">
-							<Cart
-								cart={cart}
-								handleUpdateCartQuantity={handleUpdateCartQuantity}
-								handleRemoveFromCart={handleRemoveFromCart}
-								handleEmptyCart={handleEmptyCart}/>
-						</Route>
-						<Route exact path="/checkout">
-							<Checkout
-								cart={cart}
-								order={order}
-								onCaptureCheckout={handleCaptureCheckout}
-								error={errorMessage}/>
-						</Route>
-						<Route exact path="/product/:permalink">
-							<ProductView addProduct={handleAddToCart}/>
-						</Route>
-					</Switch>
-				</div>
-			</Router>
+			<SnackbarProvider maxSnack={3}>
+				<Router>
+					<div style={{display: 'flex', justifyContent: 'center', height: '100vh'}}>
+						<Navbar totalItems={cart.total_items}/>
+						<Switch>
+							<Route exact path="/">
+								<Products products={products} onAddToCart={handleAddToCart}/>
+							</Route>
+							<Route exact path="/bag">
+								<Cart
+									cart={cart}
+									handleUpdateCartQuantity={handleUpdateCartQuantity}
+									handleRemoveFromCart={handleRemoveFromCart}
+									handleEmptyCart={handleEmptyCart}
+									snack={SnackbarProvider}/>
+							</Route>
+							<Route exact path="/checkout">
+								<Checkout
+									cart={cart}
+									order={order}
+									onCaptureCheckout={handleCaptureCheckout}
+									error={errorMessage}/>
+							</Route>
+							<Route exact path="/product/:permalink">
+								<ProductView
+									addProduct={handleAddToCart}
+									cart={cart}/>
+							</Route>
+						</Switch>
+					</div>
+				</Router>
+			</SnackbarProvider>
 		</ThemeProvider>
 	)
 }

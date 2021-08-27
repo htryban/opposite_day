@@ -23,6 +23,7 @@ export default makeStyles((theme) => ({
 	buttons: {
 		display: 'flex',
 		alignItems: 'center',
+		justifyContent: "center"
 	},
 	checkoutButton: {
 		minWidth: '110px',
