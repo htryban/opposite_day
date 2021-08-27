@@ -57,10 +57,10 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 				if(item.quantity > item.variant.inventory) {
 					item.quantity = item.variant.inventory;
 					handleUpdateCartQuantity(item.id, item.variant.inventory, item.variant.id)
-					enqueueSnackbar('Some of your items don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
+					enqueueSnackbar('Some of your selections don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
 						variant: "error",
 						persist: true,
-						dismissAction,
+						action,
 						TransitionComponent: Slide,
 						preventDuplicate: true,
 						anchorOrigin: { vertical: 'top', horizontal:'right'}
@@ -69,7 +69,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 		})
 	})
 
-	const dismissAction = key => (
+	const action = key => (
 			<Button onClick={() => { closeSnackbar(key) }}>
 				Dismiss
 			</Button>
