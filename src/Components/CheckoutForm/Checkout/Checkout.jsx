@@ -77,14 +77,14 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 				<br/>
 				<br/>
 				<Button component={Link} variant="outlined" type="button" to="/">Back Home</Button>
-				{/* <Button component={Link} variant="outlined" type="button" to="/cart">Try Again</Button> */}
 			</>
 		);
 	}
 
 	const Form = () => (activeStep === 0
 		?
-		<AddressForm checkoutToken={checkoutToken} cart={cart} nextStep={nextStep} setShippingData={setShippingData} test={test}/>
+		<AddressForm checkoutToken={checkoutToken} cart={cart} nextStep={nextStep} setShippingData={setShippingData}
+		             test={test}/>
 		: <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData}
 		               onCaptureCheckout={onCaptureCheckout}/>);
 

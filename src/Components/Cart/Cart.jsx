@@ -20,12 +20,19 @@ import "./style.css";
 import {DeleteForeverOutlined, LocalMallOutlined} from "@material-ui/icons";
 import {Image} from "react-bootstrap";
 
-const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmptyCart, enqueueSnackbar, closeSnackbar}) => {
+const Cart = ({
+	              cart,
+	              handleUpdateCartQuantity,
+	              handleRemoveFromCart,
+	              handleEmptyCart,
+	              enqueueSnackbar,
+	              closeSnackbar
+              }) => {
 	const classes = useStyles();
 
-	const handleAddQuantityCheck = async (item, productId, quantity, variantId) => {
+	const handleAddQuantityCheck = async (item, productId, quantity, operation, variantId) => {
 		if (item.variant && item.variant.inventory) { //covers items with sizes
-			if (item.variant.inventory >= quantity) {
+			if (item.variant.inventory >= quantity || operation === "remove") {
 				handleUpdateCartQuantity(productId, quantity, variantId)
 			} else {
 				console.log("no more of this item")
@@ -34,7 +41,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 					autoHideDuration: 1500,
 					TransitionComponent: Slide,
 					preventDuplicate: true,
-					anchorOrigin: { vertical: 'top', horizontal:'right'}
+					anchorOrigin: {vertical: 'top', horizontal: 'right'}
 				})
 			}
 		} else { //items with unlimited quantity
@@ -54,25 +61,27 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 
 	useEffect(() => {
 		cart.line_items.forEach((item, index) => {
-				if(item.quantity > item.variant.inventory) {
-					item.quantity = item.variant.inventory;
-					handleUpdateCartQuantity(item.id, item.variant.inventory, item.variant.id)
-					enqueueSnackbar('Some of your selections don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
-						variant: "error",
-						persist: true,
-						action,
-						TransitionComponent: Slide,
-						preventDuplicate: true,
-						anchorOrigin: { vertical: 'top', horizontal:'right'}
-					})
-				}
+			if (item.quantity > item.variant.inventory) {
+				item.quantity = item.variant.inventory;
+				handleUpdateCartQuantity(item.id, item.variant.inventory, item.variant.id)
+				enqueueSnackbar('Some of your selections don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
+					variant: "error",
+					persist: true,
+					action,
+					TransitionComponent: Slide,
+					preventDuplicate: true,
+					anchorOrigin: {vertical: 'top', horizontal: 'right'}
+				})
+			}
 		})
 	})
 
 	const action = key => (
-			<Button onClick={() => { closeSnackbar(key) }}>
-				Dismiss
-			</Button>
+		<Button onClick={() => {
+			closeSnackbar(key)
+		}}>
+			Dismiss
+		</Button>
 	);
 
 	const EmptyCart = () => (
@@ -112,10 +121,10 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 								item.variant && item.variant.sku ? item.variant.sku : "One Size",
 								<div className={classes.buttons} key={'buttonsDiv' + item.id}>
 									<Button type="button" size="small" key={'minusOne' + item.id}
-									        onClick={() => handleAddQuantityCheck(item, item.id, item.quantity - 1)}>-</Button>
+									        onClick={() => handleAddQuantityCheck(item, item.id, item.quantity - 1, "remove")}>-</Button>
 									<Typography key={'quantity' + item.id}>{item.quantity}</Typography>
 									<Button type="button" size="small" key={'plusOne' + item.id}
-									        onClick={() => handleAddQuantityCheck(item, item.id, item.quantity + 1)}>+</Button>
+									        onClick={() => handleAddQuantityCheck(item, item.id, item.quantity + 1, "add")}>+</Button>
 								</div>,
 								item.price.formatted_with_symbol,
 								<Button variant="contained" key={'delete' + item.id} text-align="center" type="button"
@@ -125,7 +134,7 @@ const Cart = ({cart, handleUpdateCartQuantity, handleRemoveFromCart, handleEmpty
 								</Button>
 							]
 							return (
-								<TableRow hover role="checkbox" tabIndex={-1} key={'row'+item.id}>
+								<TableRow hover role="checkbox" tabIndex={-1} key={'row' + item.id}>
 									{columns.map((column, index) => {
 										const value = row[index];
 										return (

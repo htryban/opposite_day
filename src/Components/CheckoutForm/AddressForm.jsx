@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Grid, InputLabel, MenuItem, Select, Slide, Typography} from '@material-ui/core';
 import {FormProvider, useForm} from 'react-hook-form';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 import {commerce} from '../../lib/commerce';
 import FormInput from './CustomTextField';
 import {withSnackbar} from "notistack";
 
-const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}) => {
+const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar, handleUpdateCartQuantity}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
 	const [shippingCountry, setShippingCountry] = useState('');
 	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -15,6 +15,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}
 	const [shippingOptions, setShippingOptions] = useState([]);
 	const [shippingOption, setShippingOption] = useState('');
 	const methods = useForm();
+	const history = useHistory();
 
 	const fetchShippingCountries = async (checkoutTokenId) => {
 		const {countries} = await commerce.services.localeListShippingCountries(checkoutTokenId);
@@ -43,9 +44,11 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}
 				commerce.checkout.checkQuantity(checkoutToken.id, item.id, {
 					amount: item.quantity,
 					variant_id: item.variant.id
-				}).then((response) => {
+				}).then(async (response) => {
 					if (!response.available) {
-						enqueueSnackbar('Some of your selections don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
+						enqueueSnackbar('Some of your items are no longer available. Only ' + response.live.line_items[0].variant.inventory +
+							' ' + item.variant.sku + ' ' + item.name + ' is available.' +
+							' Please update your order and Check Out again', {
 							variant: "error",
 							persist: true,
 							action,
@@ -53,6 +56,10 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}
 							preventDuplicate: true,
 							anchorOrigin: {vertical: 'top', horizontal: 'right'}
 						})
+						//console.log(item.product_id)
+						//console.log("available",response.live.line_items[0].variant.inventory)
+						//handleUpdateCartQuantity(item.product_id, response.live.line_items[0].variant.inventory);
+						history.push("/bag");
 					}
 				})
 			})
