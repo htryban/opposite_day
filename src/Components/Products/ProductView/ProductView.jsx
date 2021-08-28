@@ -67,19 +67,19 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 			inCart.push(0);
 		}) // initiates cart sizes array with a zero for each size option
 		const id = product.id
-			if (cart.line_items) {
-				for (let i = 0; i < cart.line_items.length; i++) {
-					if (id === cart.line_items[i].product_id) { //if this product is the same as the one in cart
-							sizes.forEach((option, index) => {
-								if (option.id === cart.line_items[i].variant.id) { //if the size is the same.
-									inCart[index] = (cart.line_items[i].quantity); //updates the appropriate size with its amount.
-								}
-							})
-					}
-				} // empty array if this product doesnt exist in cart
-			}
-			setSize('');
-			setCartSizes(inCart);
+		if (cart.line_items) {
+			for (let i = 0; i < cart.line_items.length; i++) {
+				if (id === cart.line_items[i].product_id) { //if this product is the same as the one in cart
+					sizes.forEach((option, index) => {
+						if (option.id === cart.line_items[i].variant.id) { //if the size is the same.
+							inCart[index] = (cart.line_items[i].quantity); //updates the appropriate size with its amount.
+						}
+					})
+				}
+			} // empty array if this product doesnt exist in cart
+		}
+		setSize('');
+		setCartSizes(inCart);
 	}, [cart, product, sizes])
 
 	useEffect(() => {
@@ -97,28 +97,28 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 			<FormControl component="fieldset">
 				<RadioGroup row aria-label="size" value={size} onClick={handleChangeSize}>
 					{sizes.map(function (lSize, index) {
-							if (lSize.inventory == null || ((!cartSizes || cartSizes.length === 0) && lSize.inventory > 0)) {
+						if (lSize.inventory == null || ((!cartSizes || cartSizes.length === 0) && lSize.inventory > 0)) {
+							return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
+							                         control={<Radio/>} label={lSize.sku} value={index}
+							                         labelPlacement="bottom"/>;
+						} else if (cartSizes && cartSizes.length > 0) {
+							if (cartSizes[index] < lSize.inventory) {
 								return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
 								                         control={<Radio/>} label={lSize.sku} value={index}
 								                         labelPlacement="bottom"/>;
-							} else if (cartSizes && cartSizes.length > 0) {
-								if (cartSizes[index] < lSize.inventory) {
-									return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
-									                         control={<Radio/>} label={lSize.sku} value={index}
-									                         labelPlacement="bottom"/>;
-								} else {
-									return <FormControlLabel disabled={true} control={<Radio/>}
-									                         label={"Sold Out"} key={'radiobutton' + index}
-									                         value={lSize.sku}
-									                         labelPlacement="bottom"/>;
-								}
 							} else {
 								return <FormControlLabel disabled={true} control={<Radio/>}
 								                         label={"Sold Out"} key={'radiobutton' + index}
 								                         value={lSize.sku}
 								                         labelPlacement="bottom"/>;
 							}
-						})
+						} else {
+							return <FormControlLabel disabled={true} control={<Radio/>}
+							                         label={"Sold Out"} key={'radiobutton' + index}
+							                         value={lSize.sku}
+							                         labelPlacement="bottom"/>;
+						}
+					})
 					}
 				</RadioGroup>
 			</FormControl>
@@ -157,7 +157,7 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 												autoHideDuration: 1500,
 												TransitionComponent: Slide,
 												preventDuplicate: true,
-												anchorOrigin: { vertical: 'top', horizontal:'right'}
+												anchorOrigin: {vertical: 'top', horizontal: 'right'}
 											})
 										}}>
 										<LocalMallOutlined/> {sizes && (size === '' || size === undefined) ? 'Choose Size' : 'Add to Bag'}

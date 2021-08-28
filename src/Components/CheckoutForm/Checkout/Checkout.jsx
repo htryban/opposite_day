@@ -25,7 +25,6 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 	const [shippingData, setShippingData] = useState({});
 	const classes = useStyles();
 	const history = useHistory();
-	//const [allowedAmounts, setAllowedAmounts] = useState(false);
 
 	const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -41,6 +40,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 					if (activeStep !== steps.length) history.push('/');
 				}
 			};
+
 			generateToken();
 		}
 	}, [cart, activeStep, history]);
@@ -50,18 +50,6 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 
 		nextStep();
 	};
-
-	// const legalCheckout = () => {
-	// 	cart.line_items.map((item) => {
-	// 		if (item.variant) {
-	// 			setAllowedAmounts(commerce.checkout.checkQuantity(checkoutToken.id, item.id,
-	// 				[amount: item.variant.quantity, variants:
-	// 						[item.variant.id: 'ad']
-	// 		]);
-	// 		)
-	// 		}
-	// 	})
-	// }
 
 	let Confirmation = () => (order.customer ? (
 		<>
@@ -89,14 +77,14 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 				<br/>
 				<br/>
 				<Button component={Link} variant="outlined" type="button" to="/">Back Home</Button>
-				{/* <Button component={Link} variant="outlined" type="button" to="/cart">Try Again</Button> */}
 			</>
 		);
 	}
 
 	const Form = () => (activeStep === 0
 		?
-		<AddressForm checkoutToken={checkoutToken} nextStep={nextStep} setShippingData={setShippingData} test={test}/>
+		<AddressForm checkoutToken={checkoutToken} cart={cart} nextStep={nextStep} setShippingData={setShippingData}
+		             test={test}/>
 		: <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData}
 		               onCaptureCheckout={onCaptureCheckout}/>);
 
