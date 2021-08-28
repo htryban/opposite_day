@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Grid, InputLabel, MenuItem, Select, Typography} from '@material-ui/core';
+import {Button, Grid, InputLabel, MenuItem, Select, Slide, Typography} from '@material-ui/core';
 import {FormProvider, useForm} from 'react-hook-form';
 import {Link} from 'react-router-dom';
 
 import {commerce} from '../../lib/commerce';
 import FormInput from './CustomTextField';
+import {withSnackbar} from "notistack";
 
-const AddressForm = ({checkoutToken, test}) => {
+const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
 	const [shippingCountry, setShippingCountry] = useState('');
 	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -35,6 +36,39 @@ const AddressForm = ({checkoutToken, test}) => {
 		setShippingOptions(options);
 		setShippingOption(options[0].id);
 	};
+
+	useEffect(() => {
+		const checkRequestedQuantity = () => {
+			cart.line_items.forEach((item) => {
+				commerce.checkout.checkQuantity(checkoutToken.id, item.id, {
+					amount: item.quantity,
+					variant_id: item.variant.id
+				}).then((response) => {
+					if (!response.available) {
+						enqueueSnackbar('Some of your selections don\'t have enough Inventory to fulfill your order! Your Bag has been adjusted accordingly.', {
+							variant: "error",
+							persist: true,
+							action,
+							TransitionComponent: Slide,
+							preventDuplicate: true,
+							anchorOrigin: {vertical: 'top', horizontal: 'right'}
+						})
+					}
+				})
+			})
+		}
+
+		const action = key => (
+			<Button onClick={() => {
+				closeSnackbar(key)
+			}}>
+				Dismiss
+			</Button>
+		);
+
+		checkRequestedQuantity();
+	})
+
 
 	useEffect(() => {
 		fetchShippingCountries(checkoutToken.id);
@@ -125,4 +159,4 @@ const AddressForm = ({checkoutToken, test}) => {
 	);
 };
 
-export default AddressForm;
+export default withSnackbar(AddressForm);
