@@ -100,7 +100,7 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<SnackbarProvider maxSnack={3}>
 				<Router>
-					<div style={{display: 'flex', justifyContent: 'center', height: '100vh'}}>
+					<div style={{display: 'flex', justifyContent: 'center', alignContent: 'center', height: '100vh - 24px', width: '100vw - 24px'}}>
 						<Navbar totalItems={cart.total_items}/>
 						<Switch>
 							<Route exact path="/">
