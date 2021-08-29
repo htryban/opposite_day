@@ -85,7 +85,7 @@ const Cart = ({
 	);
 
 	const EmptyCart = () => (
-		<Grid container lg={6} md={6} style={{display: "flex", justifyContent: "center", margin: "auto"}}>
+		<Grid container style={{display: "flex", justifyContent: "center", margin: "auto"}}>
 			<Grid>
 				<Typography align='center' variant="subtitle1">You have no items in your Bag.</Typography>
 				<Typography align='center' variant="subtitle1">Go back to the Home Page to add some!</Typography>
