@@ -1,5 +1,4 @@
 import {makeStyles} from '@material-ui/core/styles';
-import banner from '../../assets/banner.JPG'
 
 export default makeStyles((theme) => ({
 	toolbar: theme.mixins.toolbar,

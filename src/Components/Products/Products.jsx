@@ -10,7 +10,7 @@ const Products = ({products, onAddToCart}) => {
 	return (
 		<main className={classes.content}>
 			<div className={classes.toolbar}/>
-			<Grid className="banner" lg={12} spacing={12} />
+			<Grid className="banner" />
 			<Grid className="spacer-class">
 				<Typography style={{padding: "5px"}}>&nbsp;</Typography>
 			</Grid>
