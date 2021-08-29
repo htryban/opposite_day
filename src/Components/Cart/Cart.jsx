@@ -85,13 +85,15 @@ const Cart = ({
 	);
 
 	const EmptyCart = () => (
-		<Grid>
-			<Typography align='center' variant="subtitle1">You have no items in your Bag.</Typography>
-			<Typography align='center' variant="subtitle1">Go back to the home page to add some!</Typography>
-			<br/><br/>
-			<Button style={{display: "flex", justifyContent: "center"}} component={Link} to="/"
-			        className={classes.checkoutButton} size="large"
-			        variant="contained" color="primary" type="button">Home</Button>
+		<Grid container lg={6} md={6} style={{display: "flex", justifyContent: "center", margin: "auto"}}>
+			<Grid>
+				<Typography align='center' variant="subtitle1">You have no items in your Bag.</Typography>
+				<Typography align='center' variant="subtitle1">Go back to the Home Page to add some!</Typography>
+				<br/><br/>
+				<Button style={{display: "flex", justifyContent: "center"}} component={Link} to="/"
+				        className={classes.checkoutButton} size="large"
+				        variant="contained" color="primary" type="button">Home</Button>
+			</Grid>
 		</Grid>
 	);
 

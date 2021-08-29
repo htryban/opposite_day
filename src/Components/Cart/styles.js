@@ -41,5 +41,12 @@ export default makeStyles((theme) => ({
 		marginTop: '5%',
 		width: '100%',
 		justifyContent: 'flex-end',
+	},
+	containGrid: {
+		display: "flex",
+		justifyContent: "center",
+		margin: "auto",
+		padding: "24px",
+		marginTop: "10px"
 	}
 }));

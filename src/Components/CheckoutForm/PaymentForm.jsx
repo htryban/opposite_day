@@ -4,6 +4,7 @@ import {CardElement, Elements, ElementsConsumer} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
 import Review from './Review';
+import "./style.css";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY_LIVE);
 
@@ -17,6 +18,7 @@ const PaymentForm = ({checkoutToken, nextStep, backStep, shippingData, onCapture
 
 		const {error, paymentMethod} = await stripe.createPaymentMethod({type: 'card', card: cardElement});
 
+		console.log("checkout", checkoutToken)
 		if (error) {
 			console.log('[error]', error);
 		} else {

@@ -6,6 +6,7 @@ import {Link, useHistory} from 'react-router-dom';
 import {commerce} from '../../lib/commerce';
 import FormInput from './CustomTextField';
 import {withSnackbar} from "notistack";
+import "./style.css";
 
 const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar, handleUpdateCartQuantity}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
