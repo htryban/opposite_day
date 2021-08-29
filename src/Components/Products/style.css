@@ -1,0 +1,12 @@
+.banner {
+    padding-top: 300px;
+    margin: auto;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    max-width: 1500px;
+    background: url("../../assets/banner.JPG") no-repeat center center #ffffff;
+    background-size: contain;
+}

@@ -73,10 +73,12 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 			<>
 				<Typography variant="h5">Error: {error}</Typography>
 				<br/>
+				<Typography variant="body1">The item you are trying to purchase may no longer be available. Refresh your Bag.</Typography>
+				<br/>
 				<Typography variant="body1">Please double check your information and try again.</Typography>
 				<br/>
 				<br/>
-				<Button component={Link} variant="outlined" type="button" to="/">Back Home</Button>
+				<Button component={Link} variant="outlined" type="button" to="/bag">Bag</Button>
 			</>
 		);
 	}
