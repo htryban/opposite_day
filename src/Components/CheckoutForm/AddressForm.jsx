@@ -80,7 +80,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 		);
 
 		checkRequestedQuantity();
-	}, [fetchSubdivisions])
+	}, [cart.line_items, checkoutToken.id, closeSnackbar, enqueueSnackbar, history])
 
 
 	useEffect(() => {
@@ -89,6 +89,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 
 	useEffect(() => {
 		if (shippingCountry) fetchSubdivisions(shippingCountry);
+		// eslint-disable-next-line
 	}, [shippingCountry]);
 
 	useEffect(() => {
