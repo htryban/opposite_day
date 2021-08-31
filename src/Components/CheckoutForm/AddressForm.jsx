@@ -27,7 +27,12 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 
 	const fetchSubdivisions = async (countryCode) => {
 		const {subdivisions} = await commerce.services.localeListSubdivisions(countryCode);
-
+		for (let key in subdivisions) { //remove US territories that we dont ship to
+			if (key === "AS" || key === "GU" || key === "MP" || key === "PR" || key === "UM" || key === "VI") {
+				delete (subdivisions[key])
+			}
+		}
+		console.log("token",checkoutToken)
 		setShippingSubdivisions(subdivisions);
 		setShippingSubdivision(Object.keys(subdivisions)[0]);
 	};
@@ -75,7 +80,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 		);
 
 		checkRequestedQuantity();
-	})
+	}, [fetchSubdivisions])
 
 
 	useEffect(() => {
@@ -152,7 +157,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 					</Grid>
 					<br/>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
-						<Button component={Link} variant="outlined" to="/cart">Back to Cart</Button>
+						<Button component={Link} variant="outlined" to="/cart">Back to Bag</Button>
 						<Button type="submit" variant="contained" color="primary">Next</Button>
 					</div>
 				</form>
