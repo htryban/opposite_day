@@ -21,7 +21,7 @@ const PaymentForm = ({checkoutToken, nextStep, backStep, shippingData, onCapture
 
 		console.log("checkout", checkoutToken)
 		if (error) {
-			console.log('[error]', error);
+			console.log('pain [error]', error);
 		} else {
 			const orderData = {
 				line_items: checkoutToken.live.line_items,

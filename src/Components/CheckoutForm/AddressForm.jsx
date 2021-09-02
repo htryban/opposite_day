@@ -42,6 +42,8 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 
 		setShippingOptions(options);
 		setShippingOption(options[0].id);
+		console.log('cart',cart)
+		console.log('shipping option',shippingOption)
 	};
 
 	useEffect(() => {
