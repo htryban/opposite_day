@@ -8,7 +8,7 @@ import FormInput from './CustomTextField';
 import {withSnackbar} from "notistack";
 import "./style.css";
 
-const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar, handleUpdateCartQuantity}) => {
+const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
 	const [shippingCountry, setShippingCountry] = useState('');
 	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -32,7 +32,6 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 				delete (subdivisions[key])
 			}
 		}
-		console.log("token",checkoutToken)
 		setShippingSubdivisions(subdivisions);
 		setShippingSubdivision(Object.keys(subdivisions)[0]);
 	};
@@ -42,8 +41,6 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 
 		setShippingOptions(options);
 		setShippingOption(options[0].id);
-		console.log('cart',cart)
-		console.log('shipping option',shippingOption)
 	};
 
 	useEffect(() => {

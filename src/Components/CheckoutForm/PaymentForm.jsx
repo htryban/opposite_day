@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Divider, Typography} from '@material-ui/core';
 import {CardElement, Elements, ElementsConsumer} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -63,7 +63,7 @@ const PaymentForm = ({checkoutToken, nextStep, backStep, shippingData, onCapture
 
 	return (
 		<>
-			<Review checkoutToken={checkoutToken} shippingData={shippingData}/>
+			<Review checkoutToken={checkoutToken} shippingData={shippingData} backStep={backStep}/>
 			<Divider/>
 			<Typography variant="h6" gutterBottom style={{margin: '20px 0'}}>Payment method</Typography>
 			<Elements stripe={stripePromise}>

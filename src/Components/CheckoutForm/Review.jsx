@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Button, List, ListItem, ListItemText, Slide, Typography} from '@material-ui/core';
 import "./style.css";
 import {commerce} from "../../lib/commerce";
+import {withSnackbar} from "notistack";
 
 
-const Review = ({checkoutToken, shippingData}) => {
+const Review = ({checkoutToken, shippingData, backStep, enqueueSnackbar, closeSnackbar}) => {
 	const [taxes, setTaxes] = useState();
 	const [updatedPrices, updatePrices] = useState();
 
 	useEffect(() => {
 		const setTaxZone = () => {
-			console.log("pre taxzone set")
 			commerce.checkout.setTaxZone(checkoutToken.id, {
 				country: 'US',
 				region: shippingData.shippingSubdivision,
@@ -19,8 +19,25 @@ const Review = ({checkoutToken, shippingData}) => {
 				setTaxes(response.live)
 			}).catch(function (error) {
 				console.log("oopsies thats bad", error);
+				enqueueSnackbar(shippingData.zip + " is not a valid " + shippingData.shippingSubdivision + " zip code. Go back and double check your address.", {
+					variant: "error",
+					persist: true,
+					action,
+					TransitionComponent: Slide,
+					preventDuplicate: true,
+					anchorOrigin: {vertical: 'top', horizontal: 'right'}
+				})
 			})
 		}
+
+		const action = key => (
+			<Button onClick={() => {
+				closeSnackbar(key);
+				backStep();
+			}}>
+				Go Back
+			</Button>
+		);
 
 		const setShippingZone = () => {
 			commerce.checkout.checkShippingOption(checkoutToken.id, {
@@ -38,7 +55,7 @@ const Review = ({checkoutToken, shippingData}) => {
 		}
 		setShippingZone();
 		console.log("shipping data", shippingData)
-	}, [checkoutToken.id, shippingData.shippingSubdivision, shippingData.zip, taxes])
+	}, [checkoutToken.id, taxes])
 
 	return (
 		<>
@@ -57,13 +74,15 @@ const Review = ({checkoutToken, shippingData}) => {
 					<ListItemText
 						primary="Shipping"
 						secondary="Standard Domestic"/>
-					<Typography variant="body2">{updatedPrices ? updatedPrices.shipping.price.formatted_with_symbol : 'Calculating...'}</Typography>
+					<Typography
+						variant="body2">{updatedPrices ? updatedPrices.shipping.price.formatted_with_symbol : 'Calculating...'}</Typography>
 				</ListItem>
 				<ListItem style={{padding: '10px 0'}} key="taxListItem">
 					<ListItemText
 						primary="Tax"
 						secondary={shippingData.shippingSubdivision}/>
-					<Typography variant="body2">{taxes ? updatedPrices.tax.amount.formatted_with_symbol : 'Calculating...'}</Typography>
+					<Typography
+						variant="body2">{taxes ? updatedPrices.tax.amount.formatted_with_symbol : 'Calculating...'}</Typography>
 				</ListItem>
 				<ListItem style={{padding: '10px 0'}}>
 					<ListItemText primary="Total"/>
@@ -76,4 +95,4 @@ const Review = ({checkoutToken, shippingData}) => {
 	);
 };
 
-export default Review;
+export default withSnackbar(Review);

@@ -16,10 +16,11 @@ import {commerce} from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
 import useStyles from './styles';
+import {withSnackbar} from "notistack";
 
 const steps = ['Shipping address', 'Payment details'];
 
-const Checkout = ({cart, onCaptureCheckout, order, error}) => {
+const Checkout = ({cart, onCaptureCheckout, order, error, enqueueSnackbar}) => {
 	const [checkoutToken, setCheckoutToken] = useState(null);
 	const [activeStep, setActiveStep] = useState(0);
 	const [shippingData, setShippingData] = useState({});
@@ -40,7 +41,6 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 					if (activeStep !== steps.length) history.push('/');
 				}
 			};
-
 			generateToken();
 		}
 	}, [cart, activeStep, history]);
@@ -55,9 +55,9 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 		<>
 			<div>
 				<Typography variant="h5">Thank you for your purchase, {order.customer.firstname}.</Typography>
-				<Typography variant="body1">You should receive an order confirmation email soon.</Typography>
+				<Typography variant="body1">You should receive an email confirming your order shortly.</Typography>
 				<Divider className={classes.divider}/>
-				<Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
+				<Typography variant="subtitle2">Order Number: {order.customer_reference}</Typography>
 			</div>
 			<br/>
 			<Button component={Link} variant="outlined" type="button" to="/">Home</Button>
@@ -73,7 +73,8 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 			<>
 				<Typography variant="h5">Error: {error}</Typography>
 				<br/>
-				<Typography variant="body1">The item you are trying to purchase may no longer be available. Refresh your Bag.</Typography>
+				<Typography variant="body1">The item you are trying to purchase may no longer be available. Refresh your
+					Bag.</Typography>
 				<br/>
 				<Typography variant="body1">Please double check your information and try again.</Typography>
 				<br/>
@@ -85,8 +86,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 
 	const Form = () => (activeStep === 0
 		?
-		<AddressForm checkoutToken={checkoutToken} cart={cart} nextStep={nextStep} setShippingData={setShippingData}
-		             test={test}/>
+		<AddressForm checkoutToken={checkoutToken} cart={cart} nextStep={nextStep} test={test}/>
 		: <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData}
 		               onCaptureCheckout={onCaptureCheckout}/>);
 
@@ -111,4 +111,4 @@ const Checkout = ({cart, onCaptureCheckout, order, error}) => {
 	);
 };
 
-export default Checkout;
+export default withSnackbar(Checkout);
