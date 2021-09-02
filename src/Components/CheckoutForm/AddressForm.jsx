@@ -8,7 +8,7 @@ import FormInput from './CustomTextField';
 import {withSnackbar} from "notistack";
 import "./style.css";
 
-const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar, handleUpdateCartQuantity}) => {
+const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
 	const [shippingCountry, setShippingCountry] = useState('');
 	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -27,7 +27,11 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 
 	const fetchSubdivisions = async (countryCode) => {
 		const {subdivisions} = await commerce.services.localeListSubdivisions(countryCode);
-
+		for (let key in subdivisions) { //remove US territories that we dont ship to
+			if (key === "AS" || key === "GU" || key === "MP" || key === "PR" || key === "UM" || key === "VI") {
+				delete (subdivisions[key])
+			}
+		}
 		setShippingSubdivisions(subdivisions);
 		setShippingSubdivision(Object.keys(subdivisions)[0]);
 	};
@@ -75,7 +79,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 		);
 
 		checkRequestedQuantity();
-	})
+	}, [cart.line_items, checkoutToken.id, closeSnackbar, enqueueSnackbar, history])
 
 
 	useEffect(() => {
@@ -84,6 +88,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 
 	useEffect(() => {
 		if (shippingCountry) fetchSubdivisions(shippingCountry);
+		// eslint-disable-next-line
 	}, [shippingCountry]);
 
 	useEffect(() => {
@@ -152,7 +157,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar,
 					</Grid>
 					<br/>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
-						<Button component={Link} variant="outlined" to="/cart">Back to Cart</Button>
+						<Button component={Link} variant="outlined" to="/cart">Back to Bag</Button>
 						<Button type="submit" variant="contained" color="primary">Next</Button>
 					</div>
 				</form>
