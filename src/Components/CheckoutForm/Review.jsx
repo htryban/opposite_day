@@ -55,6 +55,7 @@ const Review = ({checkoutToken, shippingData, backStep, enqueueSnackbar, closeSn
 		}
 		setShippingZone();
 		console.log("shipping data", shippingData)
+		// eslint-disable-next-line
 	}, [checkoutToken.id, taxes])
 
 	return (
