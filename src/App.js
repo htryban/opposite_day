@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {commerce} from './lib/commerce'
-import {Cart, Checkout, Navbar, Products} from './Components'
+import {Cart, Checkout, Navbar, Products, NotFound} from './Components'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import ProductView from './Components/Products/ProductView/ProductView';
@@ -125,6 +125,9 @@ const App = () => {
 								<ProductView
 									addProduct={handleAddToCart}
 									cart={cart}/>
+							</Route>
+							<Route>
+								<NotFound />
 							</Route>
 						</Switch>
 					</div>
