@@ -17,6 +17,7 @@ import ImageGallery from 'react-image-gallery';
 import {withSnackbar} from "notistack";
 
 import "./style.css";
+import {Image} from "react-bootstrap";
 
 const createMarkup = (text) => {
 	return {__html: text};
@@ -29,6 +30,7 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 	const [loading, setLoading] = useState(true);
 	const [productImages, setProductImages] = useState([])
 	const [cartSizes, setCartSizes] = useState([])
+	const [lastImage, setLastImage] = useState('')
 
 
 	const fetchProduct = async (permalink) => {
@@ -53,6 +55,7 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 				originalHeight: 400, originalWidth: 400
 			})
 		))
+		setLastImage(images[images.length - 1])
 		setProductImages(images)
 	}
 
@@ -174,13 +177,19 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 								dangerouslySetInnerHTML={createMarkup(product.description)}
 							/>
 						</div>
+						<div className="measurements-section">
+							<br/><br/>
+							<Typography variant="h5">Measurements</Typography>
+							<hr/>
+							<Image className="measurements-image" src={lastImage.original} rounded/>
+						</div>
 					</Grid>
 				</Grid>
 				<Grid className="spacer-class">
 					<Typography style={{padding: "5px"}}>&nbsp;</Typography>
 				</Grid>
 			</Grid>
-			{loading && <Spinner/>}
+			{loading && <Spinner />}
 		</Container>
 	);
 };
