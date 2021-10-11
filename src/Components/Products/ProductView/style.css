@@ -117,6 +117,24 @@
 
 .notes-section {
     padding-left: 20px;
+    padding-right: 20px;
+}
+
+.measurements-section {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (min-width: 960px) {
+    .measurements-image {
+        width: 60% !important;
+    }
+}
+
+@media (max-width: 959px) {
+    .measurements-image {
+        width: 100% !important;
+    }
 }
 
 .image-gallery {
