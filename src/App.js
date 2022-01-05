@@ -96,6 +96,7 @@ const App = () => {
 	useEffect(() => {
 		fetchProducts().then();
 		fetchCart().then();
+		// eslint-disable-next-line
 	}, []);
 
 	const refreshCart = async () => {
