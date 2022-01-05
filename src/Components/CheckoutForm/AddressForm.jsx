@@ -162,12 +162,6 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}
 					</div>
 				</form>
 			</FormProvider>
-			<br/>
-			<Typography variant="subtitle1">These products are not currently real, and this site is for testing only.
-				Please come back soon to view our new collections when they are available. By clicking 'Next',
-				you agree that any product that you checkout is not real and will never be shipping. You are committing
-				a
-				charitable act with no expectation of anything in return.</Typography>
 		</>
 	);
 };
