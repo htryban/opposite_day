@@ -6,6 +6,8 @@ import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import ProductView from './Components/Products/ProductView/ProductView';
 import Spinner from "./Components/Spinner/Spinner";
 import {SnackbarProvider} from 'notistack';
+import {initializeApp} from 'firebase/app'
+import {getAnalytics, logEvent} from 'firebase/analytics'
 
 const theme = createTheme({
 	palette: {
@@ -37,15 +39,31 @@ const theme = createTheme({
 	}
 });
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+	apiKey: "AIzaSyD4xpcuO88Ol8E6QV9LI7iywQNYu-0xg_o",
+	authDomain: "opposite-day.firebaseapp.com",
+	projectId: "opposite-day",
+	storageBucket: "opposite-day.appspot.com",
+	messagingSenderId: "197540795751",
+	appId: "1:197540795751:web:97e7e03091e55afac98bc2",
+	measurementId: "G-JNS87VD7CP"
+};
+
 const App = () => {
 	const [products, setProducts] = useState();
 	const [cart, setCart] = useState({});
 	const [order, setOrder] = useState({});
 	const [errorMessage, setErrorMessage] = useState('');
 
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+	const analytics = getAnalytics(app);
+
 	const fetchProducts = async () => {
 		const {data} = await commerce.products.list();
-
+		logEvent(analytics, "homepage loaded")
 		setProducts(data);
 	}
 
@@ -57,6 +75,7 @@ const App = () => {
 		const {cart} = variantId ? await commerce.cart.add(productId, quantity, variantId)
 			: await commerce.cart.add(productId, quantity);
 		setCart(cart);
+		logEvent(analytics, "item added to cart", productId)
 	}
 
 	const handleUpdateCartQuantity = async (productId, quantity) => {
