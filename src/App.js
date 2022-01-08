@@ -114,6 +114,10 @@ const App = () => {
 		}
 	};
 
+	const logGoToCheckout = async () => {
+		logEvent(analytics, "goto checkout")
+	}
+
 	if (!products) return <Spinner/>
 
 	return (
@@ -139,6 +143,7 @@ const App = () => {
 									cart={cart}
 									order={order}
 									onCaptureCheckout={handleCaptureCheckout}
+									logCheckout={logGoToCheckout}
 									error={errorMessage}/>
 							</Route>
 							<Route exact path="/product/:permalink">
