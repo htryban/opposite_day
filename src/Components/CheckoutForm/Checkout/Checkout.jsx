@@ -44,7 +44,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error, logCheckout, enqueueSn
 			generateToken();
 		}
 		logCheckout();
-	}, [cart, activeStep, history]);
+	}, [cart, activeStep, history, logCheckout]);
 
 	const test = (data) => {
 		setShippingData(data);
