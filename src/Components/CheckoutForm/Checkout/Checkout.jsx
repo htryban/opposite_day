@@ -20,7 +20,7 @@ import {withSnackbar} from "notistack";
 
 const steps = ['Shipping address', 'Payment details'];
 
-const Checkout = ({cart, onCaptureCheckout, order, error, enqueueSnackbar}) => {
+const Checkout = ({cart, onCaptureCheckout, order, error, logCheckout, enqueueSnackbar}) => {
 	const [checkoutToken, setCheckoutToken] = useState(null);
 	const [activeStep, setActiveStep] = useState(0);
 	const [shippingData, setShippingData] = useState({});
@@ -43,6 +43,7 @@ const Checkout = ({cart, onCaptureCheckout, order, error, enqueueSnackbar}) => {
 			};
 			generateToken();
 		}
+		logCheckout();
 	}, [cart, activeStep, history]);
 
 	const test = (data) => {
