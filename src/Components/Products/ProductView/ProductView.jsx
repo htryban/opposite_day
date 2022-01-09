@@ -17,6 +17,7 @@ import ImageGallery from 'react-image-gallery';
 import {withSnackbar} from "notistack";
 
 import "./style.css";
+import "../../../masterTemplate.css"
 import {Image} from "react-bootstrap";
 
 const createMarkup = (text) => {

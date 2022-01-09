@@ -17,6 +17,7 @@ import Spinner from "../Spinner/Spinner";
 import {withSnackbar} from "notistack";
 
 import "./style.css";
+import "../../masterTemplate.css"
 import {DeleteForeverOutlined, LocalMallOutlined} from "@material-ui/icons";
 import {Image} from "react-bootstrap";
 
@@ -60,7 +61,7 @@ const Cart = ({
 	];
 
 	useEffect(() => {
-		cart.line_items.forEach((item, index) => {
+		cart.line_items.forEach((item) => {
 			if (item.quantity > item.variant.inventory) {
 				item.quantity = item.variant.inventory;
 				handleUpdateCartQuantity(item.id, item.variant.inventory, item.variant.id)

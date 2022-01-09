@@ -7,6 +7,7 @@ import {commerce} from '../../lib/commerce';
 import FormInput from './CustomTextField';
 import {withSnackbar} from "notistack";
 import "./style.css";
+import "../../masterTemplate.css"
 
 const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
