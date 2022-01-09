@@ -98,7 +98,7 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 	const SizeSection = () => (
 		<div className="center">
 			<FormControl component="fieldset">
-				<RadioGroup row aria-label="size" value={size} onClick={handleChangeSize}>
+				<RadioGroup row aria-label="size" value={size} className="center" onClick={handleChangeSize}>
 					{sizes.map(function (lSize, index) {
 						if (lSize.inventory == null || ((!cartSizes || cartSizes.length === 0) && lSize.inventory > 0)) {
 							return <FormControlLabel checked={size === sizes[index]} key={'radiobutton' + index}
@@ -110,8 +110,8 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 								                         control={<Radio/>} label={lSize.sku} value={index}
 								                         labelPlacement="bottom"/>;
 							} else {
-								return <FormControlLabel disabled={true} control={<Radio/>}
-								                         label={"Sold Out"} key={'radiobutton' + index}
+								return <FormControlLabel disabled={true} control={<Radio/>} className='split-soldout'
+								                         label={lSize.sku + "\nSold Out"} key={'radiobutton' + index}
 								                         value={lSize.sku}
 								                         labelPlacement="bottom"/>;
 							}
