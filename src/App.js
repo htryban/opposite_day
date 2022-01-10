@@ -8,7 +8,7 @@ import Spinner from "./Components/Spinner/Spinner";
 import {SnackbarProvider} from 'notistack';
 import {initializeApp} from 'firebase/app'
 import {getAnalytics, logEvent} from 'firebase/analytics'
-import useStyles from './index'
+import useStyles from './styles'
 
 const theme = createTheme({
 	palette: {
@@ -53,6 +53,8 @@ const firebaseConfig = {
 };
 
 const App = () => {
+	const classes = useStyles();
+
 	const [products, setProducts] = useState();
 	const [cart, setCart] = useState({});
 	const [order, setOrder] = useState({});
@@ -67,8 +69,6 @@ const App = () => {
 		logEvent(analytics, "homepage loaded")
 		setProducts(data);
 	}
-
-	const classes = useStyles();
 
 	const fetchCart = async () => {
 		setCart(await commerce.cart.retrieve());
@@ -130,6 +130,8 @@ const App = () => {
 				classes={{
                     variantSuccess: classes.success,
                     variantError: classes.error,
+					variantWarning: classes.warning,
+					variantInfo: classes.info,
                 }}>
 				<Router>
 					<div style={{display: 'flex', justifyContent: 'center', alignContent: 'center', height: '100vh - 24px', width: '100vw - 24px'}}>
