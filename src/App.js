@@ -8,6 +8,7 @@ import Spinner from "./Components/Spinner/Spinner";
 import {SnackbarProvider} from 'notistack';
 import {initializeApp} from 'firebase/app'
 import {getAnalytics, logEvent} from 'firebase/analytics'
+import useStyles from './index'
 
 const theme = createTheme({
 	palette: {
@@ -120,9 +121,16 @@ const App = () => {
 
 	if (!products) return <Spinner/>
 
+	const classes = useStyles();
+
 	return (
 		<ThemeProvider theme={theme}>
-			<SnackbarProvider maxSnack={3}>
+			<SnackbarProvider
+				maxSnack={3}
+				classes={{
+                    variantSuccess: classes.success,
+                    variantError: classes.error,
+                }}>
 				<Router>
 					<div style={{display: 'flex', justifyContent: 'center', alignContent: 'center', height: '100vh - 24px', width: '100vw - 24px'}}>
 						<Navbar totalItems={cart.total_items}/>
