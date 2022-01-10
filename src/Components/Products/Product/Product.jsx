@@ -11,7 +11,7 @@ const Product = ({product, onAddToCart}) => {
 	console.log(product)
 	const classes = useStyles();
 	return (
-		<Card className="productCard">
+		<Card className="productCard" style={{borderRadius: "10px"}}>
 			<Link to={`/product/${product.permalink}`} style={{textDecoration: 'none'}}>
 				<CardActionArea>
 					<CardMedia className={classes.media} image={product.media.source} title={product.name}/>
