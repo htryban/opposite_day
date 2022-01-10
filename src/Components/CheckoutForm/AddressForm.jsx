@@ -7,6 +7,7 @@ import {commerce} from '../../lib/commerce';
 import FormInput from './CustomTextField';
 import {withSnackbar} from "notistack";
 import "./style.css";
+import "../../masterTemplate.css"
 
 const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}) => {
 	const [shippingCountries, setShippingCountries] = useState([]);
@@ -157,7 +158,7 @@ const AddressForm = ({checkoutToken, cart, test, enqueueSnackbar, closeSnackbar}
 					</Grid>
 					<br/>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
-						<Button component={Link} variant="outlined" to="/cart">Back to Bag</Button>
+						<Button component={Link} variant="outlined" to="/bag">Back to Bag</Button>
 						<Button type="submit" variant="contained" color="primary">Next</Button>
 					</div>
 				</form>

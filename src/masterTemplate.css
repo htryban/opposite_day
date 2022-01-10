@@ -1,0 +1,9 @@
+[class*="SnackbarItem-variantSuccess-"] {
+    color: black !important;
+    background-color: #c1ffbd !important;
+}
+
+[class*="SnackbarItem-variantError-"]{
+    color: black !important;
+    background-color: #ff9ea3 !important;
+}
