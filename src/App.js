@@ -68,6 +68,8 @@ const App = () => {
 		setProducts(data);
 	}
 
+	const classes = useStyles();
+
 	const fetchCart = async () => {
 		setCart(await commerce.cart.retrieve());
 	}
@@ -120,8 +122,6 @@ const App = () => {
 	}
 
 	if (!products) return <Spinner/>
-
-	const classes = useStyles();
 
 	return (
 		<ThemeProvider theme={theme}>
