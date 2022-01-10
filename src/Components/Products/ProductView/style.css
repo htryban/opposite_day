@@ -148,3 +148,8 @@
     border-radius: 10px;
     padding: 15px;
 }
+
+.split-soldout {
+    white-space: pre-line;
+    text-align: center;
+}

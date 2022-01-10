@@ -12,3 +12,11 @@
 .MuiCardActionArea-focusHighlight {
     background: white !important;
 }
+
+.image-gallery-icon:hover {
+    color: #ff9ea3 !important;
+}
+
+.image-gallery-thumbnail:hover {
+    border: 4px solid #ff9ea3 !important;
+}

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, List, ListItem, ListItemText, Slide, Typography} from '@material-ui/core';
 import "./style.css";
+import "../../masterTemplate.css"
 import {commerce} from "../../lib/commerce";
 import {withSnackbar} from "notistack";
 
