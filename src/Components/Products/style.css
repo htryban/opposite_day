@@ -1,5 +1,5 @@
 .banner {
-    padding-top: 300px;
+    padding-top: 200px;
     margin: auto;
     display: flex;
     height: auto;
@@ -7,6 +7,19 @@
     align-items: center;
     border-radius: 10px;
     max-width: 1500px;
-    background: url("../../assets/banner.JPG") no-repeat center center #ffffff;
+    background: url("../../assets/banner.png") no-repeat center center #d5b76b;
+    background-size: contain;
+}
+
+.mobile-banner {
+    padding-top: 100px;
+    margin: auto;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    max-width: 1500px;
+    background: url("../../assets/banner.png") no-repeat center center #d5b76b;
     background-size: contain;
 }

@@ -3,7 +3,7 @@ import {AppBar, Badge, IconButton, Toolbar, Typography} from '@material-ui/core'
 import {LocalMallOutlined} from "@material-ui/icons";
 import {Link, useLocation} from 'react-router-dom';
 
-import logo from '../../assets/logo cropped square.JPG';
+import logo from '../../assets/logo.png';
 import useStyles from './styles';
 
 const Navbar = ({totalItems}) => {
