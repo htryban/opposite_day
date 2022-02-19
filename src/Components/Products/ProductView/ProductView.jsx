@@ -131,7 +131,7 @@ const ProductView = ({addProduct, cart, enqueueSnackbar}) => {
 
 	return (
 		<Container className="product-view" justify="center">
-			<Grid className="asdfd">
+			<Grid className="product-grid">
 				<Grid className="backdrop">
 					<Grid container spacing={4} className="image-wrapper" onLoad={() => {
 						setLoading(false);
