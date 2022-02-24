@@ -8,7 +8,7 @@
     align-items: center;
     border-radius: 10px;
     max-width: 1500px;
-    background: url("../../assets/banner.png") no-repeat center center #d5b76b;
+    background: url("../../assets/banner.jpg") no-repeat center center #d5b76b;
     background-size: contain;
 }
 
@@ -22,6 +22,6 @@
     align-items: center;
     border-radius: 10px;
     max-width: 1500px;
-    background: url("../../assets/banner.png") no-repeat center center #d5b76b;
+    background: url("../../assets/banner.jpg") no-repeat center center #d5b76b;
     background-size: contain;
 }
